@@ -148,3 +148,6 @@ C:\Users\bedpa\OneDrive\Pulpit\Nowy folder (2)\OnlineShopWPOP\ShopOnline\obj\Deb
 C:\Users\bedpa\OneDrive\Pulpit\Nowy folder (2)\OnlineShopWPOP\ShopOnline\obj\Debug\netcoreapp3.1\ShopOnline.dll
 C:\Users\bedpa\OneDrive\Pulpit\Nowy folder (2)\OnlineShopWPOP\ShopOnline\obj\Debug\netcoreapp3.1\ShopOnline.pdb
 C:\Users\bedpa\OneDrive\Pulpit\Nowy folder (2)\OnlineShopWPOP\ShopOnline\obj\Debug\netcoreapp3.1\ShopOnline.genruntimeconfig.cache
+C:\Users\bedpa\OneDrive\Pulpit\Nowy folder (2)\OnlineShopWPOP\ShopOnline\bin\Debug\netcoreapp3.1\nlog.config
+C:\Users\bedpa\OneDrive\Pulpit\Nowy folder (2)\OnlineShopWPOP\ShopOnline\bin\Debug\netcoreapp3.1\NLog.dll
+C:\Users\bedpa\OneDrive\Pulpit\Nowy folder (2)\OnlineShopWPOP\ShopOnline\bin\Debug\netcoreapp3.1\NLog.Extensions.Logging.dll

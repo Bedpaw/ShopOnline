@@ -14,6 +14,8 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using System.Reflection;
 using System.IO;
+using ShopOnline.Contracts;
+using ShopOnline.Services;
 
 namespace ShopOnline
 {
@@ -34,6 +36,14 @@ namespace ShopOnline
                     Configuration.GetConnectionString("DefaultConnection")));
             services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
                 .AddEntityFrameworkStores<ApplicationDbContext>();
+            
+            services.AddCors(o => {
+                o.AddPolicy("CorsPolicy",
+                    builder => builder.AllowAnyOrigin()
+                        .AllowAnyMethod()
+                        .AllowAnyHeader());
+            });
+            
             services.AddSwaggerGen(c => {
                 c.SwaggerDoc("v1", new Microsoft.OpenApi.Models.OpenApiInfo
                 {
@@ -47,6 +57,8 @@ namespace ShopOnline
                 c.IncludeXmlComments(xpath);
             });
          
+            services.AddSingleton<ILoggerService, LoggerService>();
+            
             services.AddControllers();
         }
 
@@ -71,6 +83,8 @@ namespace ShopOnline
                 c.RoutePrefix = "";
             });
             app.UseHttpsRedirection();
+            
+            app.UseCors("CorsPolicy");
 
             app.UseRouting();
 
