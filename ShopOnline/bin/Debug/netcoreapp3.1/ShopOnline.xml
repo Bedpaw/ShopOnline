@@ -11,5 +11,12 @@
             <param name="id"></param>
             <returns></returns>
         </member>
+        <member name="M:ShopOnline.Controllers.ProductController.Get(System.Int32)">
+            <summary>
+            Get specific user by ID
+            </summary>
+            <param name="id"></param>
+            <returns></returns>
+        </member>
     </members>
 </doc>
