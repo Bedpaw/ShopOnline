@@ -5608,19 +5608,19 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\bedpa\\.nuget\\packages\\": {}
+    "C:\\Users\\medion\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\bedpa\\OneDrive\\Pulpit\\Nowy folder (2)\\OnlineShopWPOP\\ShopOnline\\ShopOnline.csproj",
+      "projectUniqueName": "C:\\Users\\medion\\source\\repos\\OnlineShopWPOP\\ShopOnline\\ShopOnline.csproj",
       "projectName": "ShopOnline",
-      "projectPath": "C:\\Users\\bedpa\\OneDrive\\Pulpit\\Nowy folder (2)\\OnlineShopWPOP\\ShopOnline\\ShopOnline.csproj",
-      "packagesPath": "C:\\Users\\bedpa\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\bedpa\\OneDrive\\Pulpit\\Nowy folder (2)\\OnlineShopWPOP\\ShopOnline\\obj\\",
+      "projectPath": "C:\\Users\\medion\\source\\repos\\OnlineShopWPOP\\ShopOnline\\ShopOnline.csproj",
+      "packagesPath": "C:\\Users\\medion\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\medion\\source\\repos\\OnlineShopWPOP\\ShopOnline\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\bedpa\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\medion\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -5699,7 +5699,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.302\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.301\\RuntimeIdentifierGraph.json"
       }
     }
   }
