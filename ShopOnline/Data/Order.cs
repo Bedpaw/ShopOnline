@@ -15,7 +15,8 @@ namespace ShopOnline.Data
         public decimal Amount {get; set;}
         public int? ProductId {get; set;}
 
-        public virtual IList<Product> Product {get; set}
+        public virtual IList<Product> ProductName {get; set}
+        public virtual Product product {get;set;}
 
     }
 }

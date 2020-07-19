@@ -2,8 +2,10 @@
   "ExpandedNodes": [
     "",
     "\\ShopOnline",
-    "\\ShopOnline\\Data"
+    "\\ShopOnline\\Data",
+    "\\ShopOnline\\Data\\DTS",
+    "\\ShopOnline\\Data\\Mappings"
   ],
-  "SelectedNode": "\\ShopOnline\\Data\\Product.cs",
+  "SelectedNode": "\\ShopOnline\\Data\\DTS\\ProductDTD.cs",
   "PreviewInSolutionExplorer": false
 }
