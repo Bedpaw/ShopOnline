@@ -43,6 +43,7 @@ namespace ShopOnline
                         .AllowAnyMethod()
                         .AllowAnyHeader());
             });
+            services.AddAutoMapper(typeof(Map));
             
             services.AddSwaggerGen(c => {
                 c.SwaggerDoc("v1", new Microsoft.OpenApi.Models.OpenApiInfo
