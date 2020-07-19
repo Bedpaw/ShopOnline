@@ -1,6 +1,8 @@
-﻿using System;
+﻿using ShopOnline.Data;
+using ShopOnline.IRepositoryBase;
+using System;
 
-public class IProductRepository
+public interface IProductRepository: IRepositoryBase<Product>
 {
 	
 }
