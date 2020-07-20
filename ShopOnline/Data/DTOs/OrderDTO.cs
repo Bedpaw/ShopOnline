@@ -2,7 +2,7 @@
 using System;
 using System.Collections.Generic;
 
-namespace ShopOnline.DTO
+namespace ShopOnline.Data.DTO
 {
 
     public class OrderDTO

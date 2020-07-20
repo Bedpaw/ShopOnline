@@ -1,8 +1,7 @@
 ﻿using ShopOnline.Data;
 
-namespace ShopOnline.DTO
+namespace ShopOnline.Data.DTO
 {
-
 
     public class ProductDTO
     {

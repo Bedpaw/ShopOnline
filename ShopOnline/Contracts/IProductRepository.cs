@@ -1,7 +1,13 @@
-﻿using ShopOnline.Data;
+﻿using ShopOnline.Contracts.IRepositoryBase;
+using ShopOnline.Data;
 using ShopOnline.IRepositoryBase;
 
-public interface IProductRepository : IRepositoryBase<Product>
+namespace ShopOnline.Contracts.IPoductRepository
 {
+    public interface IProductRepository : IRepositoryBase<Product>
+    {
 
+    }
 }
+
+

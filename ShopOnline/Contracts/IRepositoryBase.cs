@@ -1,7 +1,8 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 
-namespace ShopOnline.IRepositoryBase
+namespace ShopOnline.Contracts.IRepositoryBase
+
 {
     public interface IRepositoryBase<T> where T : class
     {
