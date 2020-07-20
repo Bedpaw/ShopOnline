@@ -1,10 +1,10 @@
-﻿using System;
+﻿using ShopOnline.Data;
 
-namespace ShopOnline.ProductDTO
+namespace ShopOnline.DTO
 {
 
 
-    public class ProductDTD
+    public class ProductDTO
     {
         public int Id { get; set; }
         public string Name { get; set; }

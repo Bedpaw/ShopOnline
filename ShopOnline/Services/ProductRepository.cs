@@ -1,4 +1,5 @@
-﻿using ShopOnline.Data;
+﻿using Microsoft.EntityFrameworkCore;
+using ShopOnline.Data;
 using ShopOnline.IRepositoryBase;
 using System;
 using System.Collections.Generic;
@@ -6,33 +7,45 @@ using System.Threading.Tasks;
 
 public class ProductRepository : IProductRepository
 {
-    Task<bool> IRepositoryBase<Product>.Create(Product entity)
+    private readonly ApplicationDbContext _db;
+    public ProductRepository(ApplicationDbContext db)
     {
-        throw new NotImplementedException();
+        _db = db;
+    }
+    public async Task<bool> Create(Product entity)
+    {
+        await _db.Products.AddAsync(entity);
+        return await Save();
+
     }
 
-    Task<bool> IRepositoryBase<Product>.Delete(Product entity)
+    public async Task<bool> Delete(Product entity)
     {
-        throw new NotImplementedException();
+        _db.Products.Remove(entity);
+        return await Save();
     }
 
-    Task<IList<Product>> IRepositoryBase<Product>.FindAll()
+    public async Task<IList<Product>> FindAll()
     {
-        throw new NotImplementedException();
+        var products = await _db.Products.ToListAsync();
+        return products;
     }
 
-    Task<Product> IRepositoryBase<Product>.FindById()
+    public async Task<Product> FindById(int id)
     {
-        throw new NotImplementedException();
+        var product = await _db.Products.FindAsync(id);
+        return product;
     }
 
-    Task<bool> IRepositoryBase<Product>.Save()
+    public async Task<bool> Save()
     {
-        throw new NotImplementedException();
+        var changes = await _db.SaveChangesAsync();
+        return changes > 0; 
     }
 
-    Task<bool> IRepositoryBase<Product>.Update(Product entity)
+    public async Task<bool> Update(Product entity)
     {
-        throw new NotImplementedException();
+        _db.Products.Update(entity);
+        return await Save();
     }
 }

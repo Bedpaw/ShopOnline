@@ -1,21 +1,17 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+using AutoMapper;
 using Microsoft.AspNetCore.Builder;
-using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Identity.UI;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
-using ShopOnline.Data;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using System.Reflection;
-using System.IO;
 using ShopOnline.Contracts;
+using ShopOnline.Data;
 using ShopOnline.Services;
+using System;
+using System.IO;
+using System.Reflection;
 
 namespace ShopOnline
 {
@@ -36,16 +32,18 @@ namespace ShopOnline
                     Configuration.GetConnectionString("DefaultConnection")));
             services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
                 .AddEntityFrameworkStores<ApplicationDbContext>();
-            
-            services.AddCors(o => {
+
+            services.AddCors(o =>
+            {
                 o.AddPolicy("CorsPolicy",
                     builder => builder.AllowAnyOrigin()
                         .AllowAnyMethod()
                         .AllowAnyHeader());
             });
             services.AddAutoMapper(typeof(Map));
-            
-            services.AddSwaggerGen(c => {
+
+            services.AddSwaggerGen(c =>
+            {
                 c.SwaggerDoc("v1", new Microsoft.OpenApi.Models.OpenApiInfo
                 {
                     Title = "Grocery Store API",
@@ -57,9 +55,10 @@ namespace ShopOnline
                 var xpath = Path.Combine(AppContext.BaseDirectory, xfile);
                 c.IncludeXmlComments(xpath);
             });
-         
+
             services.AddSingleton<ILoggerService, LoggerService>();
-            
+            services.AddScoped<IProductRepository, ProductRepository>();
+
             services.AddControllers();
         }
 
@@ -79,12 +78,13 @@ namespace ShopOnline
             }
 
             app.UseSwagger();
-            app.UseSwaggerUI(c => {
-                c.SwaggerEndpoint("/swagger/v1/swagger.json", "Grocery Store API" );
+            app.UseSwaggerUI(c =>
+            {
+                c.SwaggerEndpoint("/swagger/v1/swagger.json", "Grocery Store API");
                 c.RoutePrefix = "";
             });
             app.UseHttpsRedirection();
-            
+
             app.UseCors("CorsPolicy");
 
             app.UseRouting();

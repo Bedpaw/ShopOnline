@@ -3,7 +3,7 @@ using ShopOnline.Contracts;
 
 namespace ShopOnline.Services
 {
-    public class LoggerService :ILoggerService
+    public class LoggerService : ILoggerService
     {
         private static ILogger logger = LogManager.GetCurrentClassLogger();
         public void LogDebug(string message)

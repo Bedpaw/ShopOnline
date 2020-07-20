@@ -1,16 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace ShopOnline.IRepositoryBase
 {
     public interface IRepositoryBase<T> where T : class
     {
-        Task<IList<T>> FindAll();
-        Task<T> FindById();
-        Task<bool> Create(T entity);
-        Task<bool> Update(T entity);
-        Task<bool> Delete(T entity);
-        Task<bool> Save();
+        public Task<IList<T>> FindAll();
+        public Task<T> FindById(int id);
+        public Task<bool> Create(T entity);
+        public Task<bool> Update(T entity);
+        public Task<bool> Delete(T entity);
+        public Task<bool> Save();
     }
 }
