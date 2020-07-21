@@ -9,6 +9,7 @@ namespace ShopOnline.Mappings
         public Maps()
         {
             CreateMap<Product, ProductDTO>().ReverseMap();
+            CreateMap<Product, ProductCreateDTO>().ReverseMap();
             CreateMap<Order, OrderDTO>().ReverseMap();
         }
     }

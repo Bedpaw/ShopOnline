@@ -7,7 +7,7 @@ namespace ShopOnline.Data
     [Table("Orders")]
     public class Order
     {
-        public int ID { get; set; }
+        public int Id { get; set; }
         public int OrderId { get; set; }
         public string UserName { get; set; }
         public int OrderStatus { get; set; }
@@ -16,7 +16,7 @@ namespace ShopOnline.Data
         public int? ProductId { get; set; }
 
         public virtual IList<Product> ProductName { get; set;}
-        public virtual Product product { get; set; }
+        public virtual Product Product { get; set; }
 
     }
 }

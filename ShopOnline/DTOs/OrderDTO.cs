@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using ShopOnline.Data;
 
 namespace ShopOnline.DTOs
@@ -16,5 +17,6 @@ namespace ShopOnline.DTOs
         public int? ProductId { get; set; }
         public virtual IList<Product> ProductName { get; set; }
         public virtual ProductDTO product { get; set; }
-    } 
+    }
+    
 }
