@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace ShopOnline.Migrations
 {
-    public partial class add : Migration
+    public partial class Initial : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -50,28 +50,34 @@ namespace ShopOnline.Migrations
                 name: "Customers",
                 columns: table => new
                 {
-                    Id = table.Column<int>(nullable: false)
+                    customerId = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Name = table.Column<string>(nullable: false)
+                    firstName = table.Column<string>(maxLength: 50, nullable: false),
+                    lastName = table.Column<string>(maxLength: 50, nullable: false),
+                    phone = table.Column<string>(maxLength: 25, nullable: true),
+                    email = table.Column<string>(maxLength: 255, nullable: false),
+                    street = table.Column<string>(maxLength: 255, nullable: true),
+                    city = table.Column<string>(maxLength: 50, nullable: true),
+                    zipCode = table.Column<string>(maxLength: 5, nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Customers", x => x.Id);
+                    table.PrimaryKey("PK_Customers", x => x.customerId);
                 });
 
             migrationBuilder.CreateTable(
                 name: "Products",
                 columns: table => new
                 {
-                    Id = table.Column<int>(nullable: false)
+                    productId = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Name = table.Column<string>(nullable: true),
-                    Price = table.Column<decimal>(nullable: false),
-                    Quantity = table.Column<int>(nullable: false)
+                    name = table.Column<string>(maxLength: 30, nullable: false),
+                    price = table.Column<decimal>(type: "decimal(10,2)", nullable: false),
+                    quantity = table.Column<decimal>(type: "decimal(10,2)", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Products", x => x.Id);
+                    table.PrimaryKey("PK_Products", x => x.productId);
                 });
 
             migrationBuilder.CreateTable(
@@ -196,7 +202,7 @@ namespace ShopOnline.Migrations
                         name: "FK_Orders_Customers_CustomerId",
                         column: x => x.CustomerId,
                         principalTable: "Customers",
-                        principalColumn: "Id",
+                        principalColumn: "customerId",
                         onDelete: ReferentialAction.Cascade);
                 });
 
@@ -206,7 +212,7 @@ namespace ShopOnline.Migrations
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Quantity = table.Column<decimal>(nullable: false),
+                    Quantity = table.Column<int>(nullable: false),
                     ProductId = table.Column<int>(nullable: false),
                     OrderId = table.Column<int>(nullable: false)
                 },
@@ -223,7 +229,7 @@ namespace ShopOnline.Migrations
                         name: "FK_OrderItems_Products_ProductId",
                         column: x => x.ProductId,
                         principalTable: "Products",
-                        principalColumn: "Id",
+                        principalColumn: "productId",
                         onDelete: ReferentialAction.Cascade);
                 });
 

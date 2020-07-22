@@ -11,7 +11,9 @@ namespace ShopOnline.Data
     {
         [Key]
         public int Id { get; set; }
-        public decimal Quantity { get; set; }
+
+        [Required]
+        public int Quantity { get; set; }
 
         [ForeignKey("ProductId")]
         public Product Product { get; set; }
