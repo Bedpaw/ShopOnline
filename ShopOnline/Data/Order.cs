@@ -1,22 +1,22 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace ShopOnline.Data
 {
-    [Table("Orders")]
     public class Order
-    {
+    {   
+        [Key]
         public int Id { get; set; }
-        public int OrderId { get; set; }
-        public string UserName { get; set; }
-        public int OrderStatus { get; set; }
-        public DateTime OrderSent { get; set; }
-        public decimal Amount { get; set; }
-        public int? ProductId { get; set; }
+        public int OrderStatus { get; set; } 
+        
+        [ForeignKey("CustomerId")]
+        public Customer Customer { get; set; }
+        public int CustomerId { get; set; }
 
-        public virtual IList<Product> ProductName { get; set;}
-        public virtual Product Product { get; set; }
-
+        public ICollection<OrderItem> OrderItems { get; set; }
     }
 }
