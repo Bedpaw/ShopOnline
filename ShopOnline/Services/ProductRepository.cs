@@ -12,6 +12,13 @@ namespace ShopOnline.Data
         {
             _db = db;
         }
+
+        public async Task<bool> IsExists(int id)
+        {
+            var isExists = await _db.Products.AnyAsync(q => q.productId == id);
+            return isExists;
+        }
+
         public async Task<bool> Create(Product entity)
         {
             await _db.Products.AddAsync(entity);

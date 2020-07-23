@@ -85,7 +85,97 @@ namespace ShopOnline.Controllers
                     return InternalError($"{location}: Creation failed");
                 }
                 _logger.LogInfo($"{location}: Creation was successful");
-                return Created("Create", new { product });
+                return Created("Create", new { product }); // :TODO Czy mogę zrobić 
+            }
+            catch (Exception e)
+            {
+                return InternalError($"{location}: {e.Message} - {e.InnerException}");
+            }
+        }
+        
+        /// <summary>
+        /// Update a Product by Id
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="ProductDTO"></param>
+        /// <returns></returns>
+        [HttpPut("{id}")]
+        [ProducesResponseType(StatusCodes.Status204NoContent)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        public async Task<IActionResult> Update(int id, [FromBody] ProductUpdateDTO productDTO)
+        {
+            var location = GetControllerActionNames();
+            try
+            {
+                _logger.LogInfo($"{location}: Update Attempted on record with id: {id} ");
+                if (id < 1 || productDTO == null)
+                {
+                    _logger.LogWarn($"{location}: Update failed with bad data - id: {id}");
+                    return BadRequest();
+                }
+                var isExists = await _productRepository.IsExists(id);
+                if (!isExists)
+                {
+                    _logger.LogWarn($"{location}: Failed to retrieve record with id: {id}");
+                    return NotFound();
+                }
+                if (!ModelState.IsValid)
+                {
+                    _logger.LogWarn($"{location}: Data was Incomplete");
+                    return BadRequest(ModelState);
+                }
+                var product = _mapper.Map<Product>(productDTO);
+                var isSuccess = await _productRepository.Update(product);
+                if (!isSuccess)
+                {
+                    return InternalError($"{location}: Update failed for record with id: {id}");
+                }
+                _logger.LogInfo($"{location}: Record with id: {id} successfully updated");
+                return NoContent();
+            }
+            catch (Exception e)
+            {
+                return InternalError($"{location}: {e.Message} - {e.InnerException}");
+            }
+        }
+        
+        /// <summary>
+        /// Removes an product by id
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        [HttpDelete("{id}")]
+        [ProducesResponseType(StatusCodes.Status204NoContent)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        public async Task<IActionResult> Delete(int id)
+        {
+            var location = GetControllerActionNames();
+            try
+            {
+                _logger.LogInfo($"{location}: Delete Attempted on record with id: {id} ");
+                if (id < 1)
+                {
+                    _logger.LogWarn($"{location}: Delete failed with bad data - id: {id}");
+                    return BadRequest();
+                }
+                var isExists = await _productRepository.IsExists(id);
+                if (!isExists)
+                {
+                    _logger.LogWarn($"{location}: Failed to retrieve record with id: {id}");
+                    return NotFound();
+                }
+                var product = await _productRepository.FindById(id);
+                var isSuccess = await _productRepository.Delete(product);
+                if (!isSuccess)
+                {
+                    return InternalError($"{location}: Delete failed for record with id: {id}");
+                }
+                _logger.LogInfo($"{location}: Record with id: {id} successfully deleted");
+                return NoContent();
             }
             catch (Exception e)
             {
