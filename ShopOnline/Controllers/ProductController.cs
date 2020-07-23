@@ -44,6 +44,7 @@ namespace ShopOnline.Controllers
             {
                 _logger.LogInfo($"{location}: Attempted Call");
                 var products = await _productRepository.FindAll();
+                
                 var response = _mapper.Map<IList<ProductDTO>>(products);
                 _logger.LogInfo($"{location}: Successful");
                 return Ok(response);
