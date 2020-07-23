@@ -9,24 +9,18 @@ namespace ShopOnline.Data
 {
     public partial class Product
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Product()
-        {
-            OrderItems = new HashSet<OrderItem>();
-        }
-
         [Key]
-        public int productId { get; set; }
+        public int Id { get; set; }
 
         [Required]
         [StringLength(30)]
-        public string name { get; set; }
+        public string Name { get; set; }
 
         [Column(TypeName = "decimal(10,2)")]
-        public decimal price { get; set; }
+        public decimal Price { get; set; }
 
         [Column(TypeName = "decimal(10,2)")]
-        public decimal quantity { get; set; }
+        public decimal AvailableQuantity { get; set; }
 
         public virtual ICollection<OrderItem> OrderItems { get; set; }
     }

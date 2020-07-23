@@ -15,7 +15,7 @@ namespace ShopOnline.Data
 
         public async Task<bool> IsExists(int id)
         {
-            var isExists = await _db.Products.AnyAsync(q => q.productId == id);
+            var isExists = await _db.Products.AnyAsync(q => q.Id == id);
             return isExists;
         }
 

@@ -10,8 +10,8 @@ using ShopOnline.Data;
 namespace ShopOnline.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20200722183559_Initial")]
-    partial class Initial
+    [Migration("20200723112736_init db")]
+    partial class initdb
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -223,43 +223,43 @@ namespace ShopOnline.Migrations
 
             modelBuilder.Entity("ShopOnline.Data.Customer", b =>
                 {
-                    b.Property<int>("customerId")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<string>("city")
+                    b.Property<string>("City")
                         .HasColumnType("nvarchar(50)")
                         .HasMaxLength(50);
 
-                    b.Property<string>("email")
+                    b.Property<string>("Email")
                         .IsRequired()
                         .HasColumnType("nvarchar(255)")
                         .HasMaxLength(255);
 
-                    b.Property<string>("firstName")
+                    b.Property<string>("FirstName")
                         .IsRequired()
                         .HasColumnType("nvarchar(50)")
                         .HasMaxLength(50);
 
-                    b.Property<string>("lastName")
+                    b.Property<string>("LastName")
                         .IsRequired()
                         .HasColumnType("nvarchar(50)")
                         .HasMaxLength(50);
 
-                    b.Property<string>("phone")
+                    b.Property<string>("Phone")
                         .HasColumnType("nvarchar(25)")
                         .HasMaxLength(25);
 
-                    b.Property<string>("street")
+                    b.Property<string>("Street")
                         .HasColumnType("nvarchar(255)")
                         .HasMaxLength(255);
 
-                    b.Property<string>("zipCode")
+                    b.Property<string>("ZipCode")
                         .HasColumnType("nvarchar(5)")
                         .HasMaxLength(5);
 
-                    b.HasKey("customerId");
+                    b.HasKey("Id");
 
                     b.ToTable("Customers");
                 });
@@ -311,23 +311,23 @@ namespace ShopOnline.Migrations
 
             modelBuilder.Entity("ShopOnline.Data.Product", b =>
                 {
-                    b.Property<int>("productId")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<string>("name")
+                    b.Property<decimal>("AvailableQuantity")
+                        .HasColumnType("decimal(10,2)");
+
+                    b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("nvarchar(30)")
                         .HasMaxLength(30);
 
-                    b.Property<decimal>("price")
+                    b.Property<decimal>("Price")
                         .HasColumnType("decimal(10,2)");
 
-                    b.Property<decimal>("quantity")
-                        .HasColumnType("decimal(10,2)");
-
-                    b.HasKey("productId");
+                    b.HasKey("Id");
 
                     b.ToTable("Products");
                 });
