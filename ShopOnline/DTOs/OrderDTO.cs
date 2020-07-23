@@ -13,4 +13,10 @@ namespace ShopOnline.DTOs
         public ICollection<OrderItem> OrderItems { get; set; }
     }
     
+    public class OrderCreateDTO
+    {
+        public int CustomerId { get; set; }
+        public ICollection<OrderItem> OrderItems { get; set; }
+    }
+    
 }
