@@ -22,7 +22,7 @@ namespace ShopOnline.BusinessLogic
         /// <returns></returns>
         public async Task<bool> AddProduct(Product product)
         {
-            var isDuplicated = await _productRepository.IsProductWithEqualName(product.name);
+            var isDuplicated = await _productRepository.IsProductWithEqualName(product.Name);
             if (isDuplicated) return false;
             
             var isSuccess = await _productRepository.Create(product);

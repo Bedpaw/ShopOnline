@@ -10,7 +10,9 @@ namespace ShopOnline.DTOs
         public int Id { get; set; }
         public string Name { get; set; }
         public float Price { get; set; }
-        public decimal Quantity { get; set; }
+
+        public decimal AvailableQuantity { get; set; }
+
         public string Image { get; set; }
   
     }
@@ -22,7 +24,7 @@ namespace ShopOnline.DTOs
         public float? Price { get; set; }
         
         [Required]
-        public float? Quantity { get; set; }
+        public decimal? AvailableQuantity { get; set; }
         public string Image { get; set; }
     }
     public class ProductUpdateDTO
@@ -32,7 +34,7 @@ namespace ShopOnline.DTOs
       
         public float Price { get; set; }
         
-        public float Quantity { get; set; }
+        public decimal AvailableQuantity { get; set; }
         
         public string Image { get; set; }
     }

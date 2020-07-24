@@ -4,30 +4,31 @@ using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Threading.Tasks;
+using Newtonsoft.Json;
 
 namespace ShopOnline.Data
 {
     public partial class Product
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Product()
-        {
-            OrderItems = new HashSet<OrderItem>();
-        }
-
         [Key]
-        public int productId { get; set; }
+        public int Id { get; set; }
 
         [Required]
         [StringLength(30)]
-        public string name { get; set; }
-
+        public string Name { get; set; }
+        
+        [Required]
+        public string Image { get; set; }
+        
+        [Required]
         [Column(TypeName = "decimal(10,2)")]
-        public decimal price { get; set; }
-
+        public decimal? Price { get; set; }
+        
+        [Required]
         [Column(TypeName = "decimal(10,2)")]
-        public decimal quantity { get; set; }
-
+        public decimal? AvailableQuantity { get; set; }
+        
+        [JsonIgnore]
         public virtual ICollection<OrderItem> OrderItems { get; set; }
     }
 

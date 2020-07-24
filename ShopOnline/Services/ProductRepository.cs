@@ -15,7 +15,7 @@ namespace ShopOnline.Data
 
         public async Task<bool> IsExists(int id)
         {
-            var isExists = await _db.Products.AnyAsync(q => q.productId == id);
+            var isExists = await _db.Products.AnyAsync(q => q.Id == id);
             return isExists;
         }
 
@@ -51,7 +51,7 @@ namespace ShopOnline.Data
 
         public async Task<bool> IsProductWithEqualName(string name)
         {
-            var anyHasEqualName = await _db.Products.AnyAsync(q => q.name == name);
+            var anyHasEqualName = await _db.Products.AnyAsync(q => q.Name == name);
             return anyHasEqualName;
         }
 
