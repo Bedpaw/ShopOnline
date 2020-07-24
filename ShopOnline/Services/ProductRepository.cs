@@ -25,7 +25,6 @@ namespace ShopOnline.Data
             return await Save();
 
         }
-
         public async Task<bool> Delete(Product entity)
         {
             _db.Products.Remove(entity);
@@ -48,6 +47,12 @@ namespace ShopOnline.Data
         {
             var changes = await _db.SaveChangesAsync();
             return changes > 0;
+        }
+
+        public async Task<bool> IsProductWithEqualName(string name)
+        {
+            var anyHasEqualName = await _db.Products.AnyAsync(q => q.name == name);
+            return anyHasEqualName;
         }
 
         public async Task<bool> Update(Product entity)

@@ -21,14 +21,17 @@ namespace ShopOnline.Controllers
         private readonly IProductRepository _productRepository;
         private readonly ILoggerService _logger;
         private readonly IMapper _mapper;
-        
+        private readonly IProductLogic _businessLogic;
         public ProductController(IProductRepository productRepository,
             ILoggerService logger,
-            IMapper mapper)
+            IMapper mapper,
+            IProductLogic businessLogic)
         {
+            
             _productRepository = productRepository;
             _logger = logger;
             _mapper = mapper;
+            _businessLogic = businessLogic;
         }
         /// <summary>
         /// Gets all products from db
@@ -79,13 +82,13 @@ namespace ShopOnline.Controllers
                     return BadRequest(ModelState);
                 }
                 var product = _mapper.Map<Product>(productDTO);
-                var isSuccess = await _productRepository.Create(product);
+                var isSuccess = await _businessLogic.AddProduct(product);
                 if (!isSuccess)
                 {
                     return InternalError($"{location}: Creation failed");
                 }
                 _logger.LogInfo($"{location}: Creation was successful");
-                return Created("Create", new { product }); // :TODO Czy mogę zrobić 
+                return Created("Create", new { product });
             }
             catch (Exception e)
             {

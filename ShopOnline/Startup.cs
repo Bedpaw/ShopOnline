@@ -12,6 +12,7 @@ using ShopOnline.Services;
 using System;
 using System.IO;
 using System.Reflection;
+using ShopOnline.BusinessLogic;
 using ShopOnline.Mappings;
 
 namespace ShopOnline
@@ -59,6 +60,7 @@ namespace ShopOnline
 
             services.AddSingleton<ILoggerService, LoggerService>();
             services.AddScoped<IProductRepository, ProductRepository>();
+            services.AddScoped<IProductLogic, ProductLogic>();
 
             services.AddControllers();
         }
