@@ -18,17 +18,11 @@ namespace ShopOnline.Controllers
     [ProducesResponseType(StatusCodes.Status200OK)]
     public class ProductController : ControllerBase
     {
-        private readonly IProductRepository _productRepository;
         private readonly ILoggerService _logger;
         private readonly IMapper _mapper;
         private readonly IProductLogic _businessLogic;
-        public ProductController(IProductRepository productRepository,
-            ILoggerService logger,
-            IMapper mapper,
-            IProductLogic businessLogic)
+        public ProductController(ILoggerService logger, IMapper mapper, IProductLogic businessLogic) 
         {
-            
-            _productRepository = productRepository;
             _logger = logger;
             _mapper = mapper;
             _businessLogic = businessLogic;
@@ -46,7 +40,7 @@ namespace ShopOnline.Controllers
             try
             {
                 _logger.LogInfo($"{location}: Attempted Call");
-                var products = await _productRepository.FindAll();
+                var products = await _businessLogic.GetAll();
                 
                 var response = _mapper.Map<IList<ProductDTO>>(products);
                 _logger.LogInfo($"{location}: Successful");
@@ -83,7 +77,7 @@ namespace ShopOnline.Controllers
                     return BadRequest(ModelState);
                 }
                 var product = _mapper.Map<Product>(productDTO);
-                var isSuccess = await _businessLogic.AddProduct(product);
+                var isSuccess = await _businessLogic.Add(product);
                 if (!isSuccess)
                 {
                     return InternalError($"{location}: Creation failed");
@@ -119,19 +113,13 @@ namespace ShopOnline.Controllers
                     _logger.LogWarn($"{location}: Update failed with bad data - id: {id}");
                     return BadRequest();
                 }
-                var isExists = await _productRepository.IsExists(id);
-                if (!isExists)
-                {
-                    _logger.LogWarn($"{location}: Failed to retrieve record with id: {id}");
-                    return NotFound();
-                }
                 if (!ModelState.IsValid)
                 {
                     _logger.LogWarn($"{location}: Data was Incomplete");
                     return BadRequest(ModelState);
                 }
                 var product = _mapper.Map<Product>(productDTO);
-                var isSuccess = await _productRepository.Update(product);
+                var isSuccess = await _businessLogic.Update(id, product);
                 if (!isSuccess)
                 {
                     return InternalError($"{location}: Update failed for record with id: {id}");
@@ -166,14 +154,7 @@ namespace ShopOnline.Controllers
                     _logger.LogWarn($"{location}: Delete failed with bad data - id: {id}");
                     return BadRequest();
                 }
-                var isExists = await _productRepository.IsExists(id);
-                if (!isExists)
-                {
-                    _logger.LogWarn($"{location}: Failed to retrieve record with id: {id}");
-                    return NotFound();
-                }
-                var product = await _productRepository.FindById(id);
-                var isSuccess = await _productRepository.Delete(product);
+                var isSuccess = await _businessLogic.Delete(id);
                 if (!isSuccess)
                 {
                     return InternalError($"{location}: Delete failed for record with id: {id}");

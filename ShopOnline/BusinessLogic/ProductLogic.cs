@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using ShopOnline.Contracts;
@@ -20,12 +21,37 @@ namespace ShopOnline.BusinessLogic
         /// </summary>
         /// <param name="productDTO"></param>
         /// <returns></returns>
-        public async Task<bool> AddProduct(Product product)
+        public async Task<bool> Add(Product product)
         {
             var isDuplicated = await _productRepository.IsProductWithEqualName(product.Name);
             if (isDuplicated) return false;
             
             var isSuccess = await _productRepository.Create(product);
+            return isSuccess;
+        }
+
+        public async  Task<IList<Product>> GetAll()
+        {
+            return await _productRepository.FindAll();
+        }
+
+
+        public async Task<bool> Update(int id, Product product)
+        {
+            var isExists = await _productRepository.IsExists(id);
+            if (!isExists) return false;
+            
+            var isSuccess = await _productRepository.Update(product);
+            return isSuccess;
+        }
+
+        public async Task<bool> Delete(int id)
+        {
+            var isExists = await _productRepository.IsExists(id);
+            if (!isExists) return false;
+            
+            var product = await _productRepository.FindById(id);
+            var isSuccess = await _productRepository.Delete(product);
             return isSuccess;
         }
     }
