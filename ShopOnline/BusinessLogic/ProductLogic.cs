@@ -16,10 +16,11 @@ namespace ShopOnline.BusinessLogic
         {
             _productRepository = productRepository;
         }
+
         /// <summary>
         /// Add product to db if not duplicated
         /// </summary>
-        /// <param name="productDTO"></param>
+        /// <param name="product"></param>
         /// <returns></returns>
         public async Task<bool> Add(Product product)
         {

@@ -10,8 +10,8 @@ using ShopOnline.Data;
 namespace ShopOnline.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20200724105438_ad")]
-    partial class ad
+    [Migration("20200724122000_init-db")]
+    partial class initdb
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
