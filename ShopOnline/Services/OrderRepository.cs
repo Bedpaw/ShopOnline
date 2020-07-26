@@ -2,6 +2,7 @@
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using ShopOnline.Contracts;
+using ShopOnline.Contracts.Repository;
 using ShopOnline.Data;
 
 namespace ShopOnline.Services

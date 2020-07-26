@@ -6,6 +6,7 @@ using AutoMapper;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using ShopOnline.Contracts;
+using ShopOnline.Contracts.BusinessLogic;
 using ShopOnline.Data;
 using ShopOnline.DTOs;
 

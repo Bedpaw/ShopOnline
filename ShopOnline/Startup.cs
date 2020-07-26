@@ -13,6 +13,8 @@ using System;
 using System.IO;
 using System.Reflection;
 using ShopOnline.BusinessLogic;
+using ShopOnline.Contracts.BusinessLogic;
+using ShopOnline.Contracts.Repository;
 using ShopOnline.Mappings;
 
 namespace ShopOnline
@@ -59,8 +61,18 @@ namespace ShopOnline
             });
 
             services.AddSingleton<ILoggerService, LoggerService>();
+            
             services.AddScoped<IProductRepository, ProductRepository>();
             services.AddScoped<IProductLogic, ProductLogic>();
+            
+            services.AddScoped<IOrderItemRepository, OrderItemRepository>();
+            services.AddScoped<IOrderItemLogic, OrderItemLogic>();
+            
+            services.AddScoped<IOrderRepository, OrderRepository>();
+            services.AddScoped<IOrderLogic, OrderLogic>();
+            
+            services.AddScoped<ICustomerRepository, CustomerRepository>();
+            services.AddScoped<ICustomerLogic, CustomerLogic>();
 
             services.AddControllers();
         }

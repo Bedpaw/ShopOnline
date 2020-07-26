@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using ShopOnline.Contracts;
+using ShopOnline.Contracts.BusinessLogic;
+using ShopOnline.Contracts.Repository;
 using ShopOnline.Data;
 using ShopOnline.DTOs;
 
