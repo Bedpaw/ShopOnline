@@ -16,7 +16,7 @@ namespace ShopOnline.Data
         [ForeignKey("CustomerId")]
         public Customer Customer { get; set; }
         public int CustomerId { get; set; }
-
+        
         public ICollection<OrderItem> OrderItems { get; set; }
     }
 }

@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore;
 using ShopOnline.Contracts.Repository;
 using ShopOnline.Data;
 
@@ -7,39 +8,51 @@ namespace ShopOnline.Services
 {
     public class CustomerRepository : ICustomerRepository
     {
-        public Task<IList<Customer>> FindAll()
+        private readonly ApplicationDbContext _db;
+        public CustomerRepository(ApplicationDbContext db)
         {
-            throw new System.NotImplementedException();
+            _db = db;
         }
 
-        public Task<Customer> FindById(int id)
+        public async Task<bool> IsExists(int id)
         {
-            throw new System.NotImplementedException();
+            var isExists = await _db.Customers.AnyAsync(q => q.Id == id);
+            return isExists;
         }
 
-        public Task<bool> IsExists(int id)
+        public async Task<bool> Create(Customer customer)
         {
-            throw new System.NotImplementedException();
+            await _db.Customers.AddAsync(customer);
+            return await Save();
+
+        }
+        public async Task<bool> Delete(Customer customer)
+        {
+            _db.Customers.Remove(customer);
+            return await Save();
         }
 
-        public Task<bool> Create(Customer entity)
+        public async Task<IList<Customer>> FindAll()
         {
-            throw new System.NotImplementedException();
+            var customers = await _db.Customers.ToListAsync();
+            return customers;
         }
 
-        public Task<bool> Update(Customer entity)
+        public async Task<Customer> FindById(int id)
         {
-            throw new System.NotImplementedException();
+            var customer = await _db.Customers.FindAsync(id);
+            return customer;
         }
 
-        public Task<bool> Delete(Customer entity)
+        public async Task<bool> Save()
         {
-            throw new System.NotImplementedException();
+            var changes = await _db.SaveChangesAsync();
+            return changes > 0;
         }
-
-        public Task<bool> Save()
+        public async Task<bool> Update(Customer customer)
         {
-            throw new System.NotImplementedException();
+            _db.Customers.Update(customer);
+            return await Save();
         }
     }
 }

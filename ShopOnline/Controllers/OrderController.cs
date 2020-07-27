@@ -35,7 +35,7 @@ namespace ShopOnline.Controllers
             [HttpGet]
             [ProducesResponseType(StatusCodes.Status200OK)]
             [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-            public async Task<IActionResult> GetOrders(int customerId)
+            public async Task<IActionResult> GetOrders()
             {
                 var location = GetControllerActionNames();
                 try
@@ -61,13 +61,13 @@ namespace ShopOnline.Controllers
             [ProducesResponseType(StatusCodes.Status201Created)]
             [ProducesResponseType(StatusCodes.Status400BadRequest)]
             [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-            public async Task<IActionResult> Create([FromBody] OrderCreateDTO orderDTO)
+            public async Task<IActionResult> Create([FromBody] OrderCreateDTO orderCreateDTO)
             {
                 var location = GetControllerActionNames();
                 try
                 {
                     _logger.LogInfo($"{location}: Create Attempted");
-                    if (orderDTO == null)
+                    if (orderCreateDTO == null)
                     {
                         _logger.LogWarn($"{location}: Empty Request was submitted");
                         return BadRequest(ModelState);
@@ -77,7 +77,7 @@ namespace ShopOnline.Controllers
                         _logger.LogWarn($"{location}: Data was Incomplete");
                         return BadRequest(ModelState);
                     }
-                    var order = _mapper.Map<Order>(orderDTO);
+                    var order = _mapper.Map<Order>(orderCreateDTO);
                     var isSuccess = await _businessLogic.Add(order);
                     if (!isSuccess)
                     {

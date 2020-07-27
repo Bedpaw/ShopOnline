@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using ShopOnline.Contracts;
@@ -24,7 +25,7 @@ namespace ShopOnline.Services
         
 
         public async Task<bool> Create(Order entity)
-        {
+        {    
             await _db.Orders.AddAsync(entity);
             return await Save();
 
@@ -37,7 +38,9 @@ namespace ShopOnline.Services
 
         public async Task<IList<Order>> FindAll()
         {
-            var orders = await _db.Orders.ToListAsync();
+            var orders = await _db.Orders
+                .Include(c => c.OrderItems)
+                .ToListAsync();
             return orders;
         }
 

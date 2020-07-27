@@ -9,7 +9,11 @@ namespace ShopOnline.DTOs
     public class CustomerCreateDTO
     {
         public string FirstName { get; set; }
-        
+       
+        [Required]
+        [StringLength(50)]
+        public string LastName { get; set; }
+
         [StringLength(25)]
         public string Phone { get; set; }
 

@@ -21,9 +21,10 @@ namespace ShopOnline.BusinessLogic
             return isSuccess;
         }
 
-        public Task<IList<Order>> GetAll()
+        public async Task<IList<Order>> GetAll()
         {
-            throw new System.NotImplementedException();
+            var isSuccess = await _orderRepository.FindAll();
+            return isSuccess;
         }
 
         public Task<bool> Update(int id, Order entity)
