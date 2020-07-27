@@ -20,9 +20,10 @@ namespace ShopOnline.BusinessLogic
             return isSuccess;
         }
 
-        public Task<IList<Customer>> GetAll()
+        public async Task<IList<Customer>> GetAll()
         {
-            throw new System.NotImplementedException();
+            var customers = await _customerRepository.FindAll();
+            return customers;
         }
 
         public Task<bool> Update(int id, Customer entity)
