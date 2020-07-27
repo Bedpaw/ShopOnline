@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using ShopOnline.Contracts.BusinessLogic;
 using ShopOnline.Contracts.Repository;
@@ -9,22 +10,29 @@ namespace ShopOnline.BusinessLogic
     public class OrderLogic : IOrderLogic
     {       
         private readonly IOrderRepository _orderRepository;
+        private readonly IProductRepository _productRepository;
 
-        public OrderLogic(IOrderRepository orderRepository)
+        public OrderLogic(IOrderRepository orderRepository, IProductRepository productRepository)
         {
             _orderRepository = orderRepository;
+            _productRepository = productRepository;
+
         }
         public async Task<bool> Add(Order order)
         {    
-            order.OrderStatus = 0;
+            foreach (var orderItem in order.OrderItems)
+            {
+                orderItem.Product = await _productRepository.FindById(orderItem.ProductId);
+            }
             var isSuccess = await _orderRepository.Create(order);
             return isSuccess;
         }
+        
 
         public async Task<IList<Order>> GetAll()
         {
-            var isSuccess = await _orderRepository.FindAll();
-            return isSuccess;
+            var orders = await _orderRepository.FindAll();
+            return orders;
         }
 
         public Task<bool> Update(int id, Order entity)

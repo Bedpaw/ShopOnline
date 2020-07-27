@@ -40,6 +40,7 @@ namespace ShopOnline.Services
         {
             var orders = await _db.Orders
                 .Include(c => c.OrderItems)
+                .ThenInclude(c => c.Product)
                 .ToListAsync();
             return orders;
         }

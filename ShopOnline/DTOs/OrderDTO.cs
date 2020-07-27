@@ -10,7 +10,7 @@ namespace ShopOnline.DTOs
     {
         public int Id { get; set; }
         public int OrderStatus { get; set; }
-        public ICollection<OrderItem> OrderItems { get; set; }
+        public ICollection<OrderItemDTO> OrderItems { get; set; }
     }
     
     public class OrderCreateDTO

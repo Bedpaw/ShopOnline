@@ -84,7 +84,7 @@ namespace ShopOnline.Controllers
                         return InternalError($"{location}: Creation failed");
                     }
                     _logger.LogInfo($"{location}: Creation was successful");
-                    return Created("Create", new { order });
+                    return Created("Create", 1);
                 }
                 catch (Exception e)
                 {
