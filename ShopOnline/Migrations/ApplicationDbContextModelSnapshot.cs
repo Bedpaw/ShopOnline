@@ -260,6 +260,52 @@ namespace ShopOnline.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Customers");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            City = "Toruń",
+                            Email = "bedpaw111@jakisemail.com",
+                            FirstName = "Pawel",
+                            LastName = "Bednarczyk",
+                            Phone = "888777666",
+                            Street = "Kolejowa 5/7",
+                            ZipCode = "87118"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            City = "Warszawa",
+                            Email = "patiiiii93@jakisemail.com",
+                            FirstName = "Patrycja",
+                            LastName = "Peczyńska",
+                            Phone = "333444555",
+                            Street = "Konstruktorska 3/4",
+                            ZipCode = "02254"
+                        },
+                        new
+                        {
+                            Id = 3,
+                            City = "Warszawa",
+                            Email = "alex@jakisemail.com",
+                            FirstName = "Ola",
+                            LastName = "Kołacz",
+                            Phone = "555666777",
+                            Street = "Mickiewicza 11/7",
+                            ZipCode = "02111"
+                        },
+                        new
+                        {
+                            Id = 4,
+                            City = "Sandomierz",
+                            Email = "wojciechjsky@jakisemail.com",
+                            FirstName = "Wojtek",
+                            LastName = "Jabłoński",
+                            Phone = "666777888",
+                            Street = "Cybernetyki 6",
+                            ZipCode = "27600"
+                        });
                 });
 
             modelBuilder.Entity("ShopOnline.Data.Order", b =>
@@ -334,6 +380,72 @@ namespace ShopOnline.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Products");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            AvailableQuantity = 50m,
+                            Image = "https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/b9c923fc-b1ea-4ea5-a7fe-8bf4a4d161fc/dbp6tcm-5eaa1d87-5b5d-4eb3-8274-abc0fce4766b.png/v1/fill/w_1024,h_1024,q_80,strp/angry_banana_by_ragenanners258_dbp6tcm-fullview.jpg?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOiIsImlzcyI6InVybjphcHA6Iiwib2JqIjpbW3siaGVpZ2h0IjoiPD0xMDI0IiwicGF0aCI6IlwvZlwvYjljOTIzZmMtYjFlYS00ZWE1LWE3ZmUtOGJmNGE0ZDE2MWZjXC9kYnA2dGNtLTVlYWExZDg3LTViNWQtNGViMy04Mjc0LWFiYzBmY2U0NzY2Yi5wbmciLCJ3aWR0aCI6Ijw9MTAyNCJ9XV0sImF1ZCI6WyJ1cm46c2VydmljZTppbWFnZS5vcGVyYXRpb25zIl19.ymP9H5-qT7QEIMXnK69ONyAqFbSzLcEdJbf9dMBefhc",
+                            Name = "Banana",
+                            Price = 0.5m
+                        },
+                        new
+                        {
+                            Id = 2,
+                            AvailableQuantity = 700m,
+                            Image = "https://cdn.pixabay.com/photo/2017/10/14/15/51/strawberry-2850845_960_720.png",
+                            Name = "Strawberry",
+                            Price = 0.9m
+                        },
+                        new
+                        {
+                            Id = 3,
+                            AvailableQuantity = 1000m,
+                            Image = "https://cdn.pixabay.com/photo/2017/10/14/15/51/raspberry-2850842_960_720.png",
+                            Name = "Raspberry",
+                            Price = 0.2m
+                        },
+                        new
+                        {
+                            Id = 4,
+                            AvailableQuantity = 150m,
+                            Image = "https://cdn.pixabay.com/photo/2013/07/12/19/34/kiwi-155022_960_720.png",
+                            Name = "Kiwi",
+                            Price = 1.5m
+                        },
+                        new
+                        {
+                            Id = 5,
+                            AvailableQuantity = 1550m,
+                            Image = "https://cdn.pixabay.com/photo/2016/06/23/18/55/apple-1475977_960_720.png",
+                            Name = "Apple",
+                            Price = 0.6m
+                        },
+                        new
+                        {
+                            Id = 6,
+                            AvailableQuantity = 400m,
+                            Image = "https://cdn.pixabay.com/photo/2020/06/23/06/45/apricot-5331575_960_720.png",
+                            Name = "Apricot",
+                            Price = 0.4m
+                        },
+                        new
+                        {
+                            Id = 7,
+                            AvailableQuantity = 500m,
+                            Image = "https://cdn.pixabay.com/photo/2018/02/24/10/03/orange-3177693_960_720.png",
+                            Name = "Orange",
+                            Price = 1.5m
+                        },
+                        new
+                        {
+                            Id = 8,
+                            AvailableQuantity = 2m,
+                            Image = "https://scontent.fzgh1-1.fna.fbcdn.net/v/t1.0-9/59922551_304682407111959_1556794403484336128_n.jpg?_nc_cat=106&_nc_sid=09cbfe&_nc_ohc=wSdiX14mNWUAX8IAqOb&_nc_ht=scontent.fzgh1-1.fna&oh=fe1cc92b02e7102c00a71500eddbd36a&oe=5F369CE8",
+                            Name = "Avocado",
+                            Price = 50m
+                        });
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
