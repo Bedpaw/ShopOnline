@@ -23,7 +23,7 @@ namespace ShopOnline.Controllers
         public CustomerController(ICustomerLogic businessLogic, ILoggerService logger, IMapper mapper)
         {
             _businessLogic = businessLogic;
-            
+            _logger = logger;
             _mapper = mapper;
         }
 
