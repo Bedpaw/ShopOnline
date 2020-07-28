@@ -1,4 +1,6 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.Reflection.Metadata.Ecma335;
 using System.Threading.Tasks;
 using ShopOnline.Contracts.BusinessLogic;
 using ShopOnline.Contracts.Repository;
@@ -16,6 +18,11 @@ namespace ShopOnline.BusinessLogic
         }
         public async Task<bool> Add(Customer customer)
         {
+            var  isExistName = await _customerRepository.IsCustomerWithEqualName(customer.FirstName);
+            var  isExistSurname = await _customerRepository.IsCustomerWithEqualSurname(customer.LastName);
+
+            if (isExistName && isExistSurname) return false;
+            
             var isSuccess = await _customerRepository.Create(customer);
             return isSuccess;
         }
@@ -26,14 +33,24 @@ namespace ShopOnline.BusinessLogic
             return customers;
         }
 
-        public Task<bool> Update(int id, Customer entity)
+        public async Task<bool> Update(int id, Customer entity)
         {
-            throw new System.NotImplementedException();
-        }
+            var isExist = await _customerRepository.IsExists(id);
+            if (!isExist) return false;
+            
+            var isSuccess = await _customerRepository.Update(entity);
+            return isSuccess;
 
-        public Task<bool> Delete(int id)
+        }
+       
+        public async Task<bool> Delete(int id)
         {
-            throw new System.NotImplementedException();
+            var isExist = await _customerRepository.IsExists(id);
+            if (!isExist) return false;
+
+            var customer = await _customerRepository.FindById(id);
+            var isSuccess = await _customerRepository.Delete(customer);
+            return isSuccess;
         }
     }
 }
