@@ -57,7 +57,7 @@ namespace ShopOnline.Controllers
 
                 var customer = _mapper.Map<Customer>(CustomerDTO);
                 var result = await _businessLogic.Add(customer);
-                if (!result.IsSuccess)
+                if (result.IsFailed)
                 {
                     return InternalError($"{location}: Creation failed");
                 }
@@ -119,7 +119,7 @@ namespace ShopOnline.Controllers
                 }
 
                 var result = await _businessLogic.Delete(id);
-                if (!result.IsSuccess)
+                if (result.IsFailed)
                 {
                     return InternalError($"{location}: Delete failed for record with id: {id}");
                 }

@@ -23,7 +23,7 @@ namespace ShopOnline.BusinessLogic
             var  isExistName = await _customerRepository.IsCustomerWithEqualName(customer.FirstName);
             var  isExistSurname = await _customerRepository.IsCustomerWithEqualSurname(customer.LastName);
 
-            if (isExistName && isExistSurname) return false;
+            if (isExistName && isExistSurname) return Result.Fail(CustomErrors.BusinessLogicError);
             
             var isSuccess = await _customerRepository.Create(customer);
             return isSuccess ? Result.Ok() : Result.Fail(CustomErrors.AddCustomerError);
@@ -36,26 +36,27 @@ namespace ShopOnline.BusinessLogic
         }
 
 
-        public Task<Result> Update(int id, Customer entity)
+        public async Task<Result> Update(int id, Customer entity)
         {
             var isExist = await _customerRepository.IsExists(id);
-            if (!isExist) return false;
+            if (!isExist) return Result.Fail(CustomErrors.BusinessLogicError);
             
             var isSuccess = await _customerRepository.Update(entity);
-            return isSuccess;
+            return isSuccess ? Result.Ok() : Result.Fail(CustomErrors.BusinessLogicError);
 
 
         }
        
 
-        public Task<Result> Delete(int id)
+        public async Task<Result> Delete(int id)
         {
             var isExist = await _customerRepository.IsExists(id);
-            if (!isExist) return false;
+            if (!isExist) return Result.Fail(CustomErrors.BusinessLogicError);
 
             var customer = await _customerRepository.FindById(id);
             var isSuccess = await _customerRepository.Delete(customer);
-            return isSuccess;
+            return isSuccess ? Result.Ok() : Result.Fail(CustomErrors.BusinessLogicError);
+
         }
     }
 }
