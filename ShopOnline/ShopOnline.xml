@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>ShopOnline</name>
+    </assembly>
+    <members>
+        <member name="M:ShopOnline.Controllers.Home.Get(System.Int32)">
+            <summary>
+            Get specific user by ID
+            </summary>
+            <param name="id"></param>
+            <returns></returns>
+        </member>
+    </members>
+</doc>
