@@ -1,12 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using FluentResults;
 using Microsoft.AspNetCore.Mvc;
 using ShopOnline.Contracts;
 using ShopOnline.Contracts.BusinessLogic;
 using ShopOnline.Contracts.Repository;
 using ShopOnline.Data;
 using ShopOnline.DTOs;
+using ShopOnline.Utils;
 
 namespace ShopOnline.BusinessLogic
 {
@@ -24,13 +26,13 @@ namespace ShopOnline.BusinessLogic
         /// </summary>
         /// <param name="product"></param>
         /// <returns></returns>
-        public async Task<bool> Add(Product product)
+        public async Task<Result> Add(Product product)
         {
             var isDuplicated = await _productRepository.IsProductWithEqualName(product.Name);
-            if (isDuplicated) return false;
+            if (isDuplicated) return Result.Fail(CustomErrors.ProductDuplicated);
             
-            var isSuccess = await _productRepository.Create(product);
-            return isSuccess;
+            await _productRepository.Create(product);
+            return Result.Ok();
         }
 
         public async  Task<IList<Product>> GetAll()
@@ -39,23 +41,22 @@ namespace ShopOnline.BusinessLogic
         }
 
 
-        public async Task<bool> Update(int id, Product product)
+        public async Task<Result> Update(int id, Product product)
         {
             var isExists = await _productRepository.IsExists(id);
-            if (!isExists) return false;
-            
-            var isSuccess = await _productRepository.Update(product);
-            return isSuccess;
+            if (!isExists) return Result.Fail(CustomErrors.NotExistByGivenId);
+            await _productRepository.Update(product);
+            return Result.Ok();
         }
 
-        public async Task<bool> Delete(int id)
+        public async Task<Result> Delete(int id)
         {
             var isExists = await _productRepository.IsExists(id);
-            if (!isExists) return false;
-            
+            if (!isExists) return Result.Fail(CustomErrors.NotExistByGivenId);
+
             var product = await _productRepository.FindById(id);
-            var isSuccess = await _productRepository.Delete(product);
-            return isSuccess;
+            await _productRepository.Delete(product);
+            return Result.Ok();
         }
     }
 }

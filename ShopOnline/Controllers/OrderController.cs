@@ -79,7 +79,7 @@ namespace ShopOnline.Controllers
                     }
                     var order = _mapper.Map<Order>(orderCreateDTO);
                     var isSuccess = await _businessLogic.Add(order);
-                    if (!isSuccess)
+                    if (!isSuccess.IsSuccess)
                     {
                         return InternalError($"{location}: Creation failed");
                     }

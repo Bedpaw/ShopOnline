@@ -1,8 +1,10 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
+using FluentResults;
 using ShopOnline.Contracts.BusinessLogic;
 using ShopOnline.Contracts.Repository;
 using ShopOnline.Data;
+using ShopOnline.Utils;
 
 namespace ShopOnline.BusinessLogic
 {
@@ -14,10 +16,10 @@ namespace ShopOnline.BusinessLogic
         {
             _customerRepository = customerRepository;
         }
-        public async Task<bool> Add(Customer customer)
+        public async Task<Result> Add(Customer customer)
         {
             var isSuccess = await _customerRepository.Create(customer);
-            return isSuccess;
+            return isSuccess ? Result.Ok() : Result.Fail(CustomErrors.AddCustomerError);
         }
 
         public async Task<IList<Customer>> GetAll()
@@ -26,12 +28,12 @@ namespace ShopOnline.BusinessLogic
             return customers;
         }
 
-        public Task<bool> Update(int id, Customer entity)
+        public Task<Result> Update(int id, Customer entity)
         {
             throw new System.NotImplementedException();
         }
 
-        public Task<bool> Delete(int id)
+        public Task<Result> Delete(int id)
         {
             throw new System.NotImplementedException();
         }

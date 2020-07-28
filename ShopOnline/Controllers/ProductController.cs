@@ -9,6 +9,7 @@ using ShopOnline.Contracts;
 using ShopOnline.Contracts.BusinessLogic;
 using ShopOnline.Data;
 using ShopOnline.DTOs;
+using ShopOnline.Utils;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -79,7 +80,7 @@ namespace ShopOnline.Controllers
                 }
                 var product = _mapper.Map<Product>(productDTO);
                 var isSuccess = await _businessLogic.Add(product);
-                if (!isSuccess)
+                if (!isSuccess.IsSuccess)
                 {
                     return InternalError($"{location}: Creation failed");
                 }
@@ -121,7 +122,7 @@ namespace ShopOnline.Controllers
                 }
                 var product = _mapper.Map<Product>(productDTO);
                 var isSuccess = await _businessLogic.Update(id, product);
-                if (!isSuccess)
+                if (!isSuccess.IsSuccess)
                 {
                     return InternalError($"{location}: Update failed for record with id: {id}");
                 }
@@ -155,8 +156,8 @@ namespace ShopOnline.Controllers
                     _logger.LogWarn($"{location}: Delete failed with bad data - id: {id}");
                     return BadRequest();
                 }
-                var isSuccess = await _businessLogic.Delete(id);
-                if (!isSuccess)
+                var result = await _businessLogic.Delete(id);
+                if (!result.IsSuccess)
                 {
                     return InternalError($"{location}: Delete failed for record with id: {id}");
                 }
@@ -179,7 +180,7 @@ namespace ShopOnline.Controllers
         private ObjectResult InternalError(string message)
         {
             _logger.LogError(message);
-            return StatusCode(500, "Something went wrong. Please contact the Administrator");
+            return StatusCode(500, CustomErrors.InternalServerError);
         }
     }
 }
