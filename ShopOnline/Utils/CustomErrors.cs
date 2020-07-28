@@ -13,13 +13,11 @@ namespace ShopOnline.Utils
         public const string NotExistByGivenId = "Product by given ID does not exist.";
         public const string AddOrderUnable = "The order has not been added to database.";
         public const string AddCustomerError = "The customer with provided data could not have been added.";
-        public const string InternalServerError = "Something went wrong. Please contact the Administrator";
-        //    public static string AddCustomerError = "The customer with provided data could not have been added.";
+        public const string InternalServerError = "Something went wrong. Please contact the Administrator.";
+        public const string CustomerByGivenIdNotExists = "The customer with provided Id does not exists.";
+        
+        public const int StatusCode450 = 450;
 
-        public enum StatusCodeCustom
-        {
-            StatusCode450
-        }
     }
 
 

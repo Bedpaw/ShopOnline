@@ -9,6 +9,7 @@ using ShopOnline.Contracts.BusinessLogic;
 using ShopOnline.Contracts.Repository;
 using ShopOnline.Data;
 using ShopOnline.DTOs;
+using ShopOnline.Utils;
 
 namespace ShopOnline.Controllers
 {
@@ -61,7 +62,8 @@ namespace ShopOnline.Controllers
             [ProducesResponseType(StatusCodes.Status201Created)]
             [ProducesResponseType(StatusCodes.Status400BadRequest)]
             [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-            public async Task<IActionResult> Create([FromBody] OrderCreateDTO orderCreateDTO)
+            [ProducesResponseType(CustomErrors.StatusCode450)]
+        public async Task<IActionResult> Create([FromBody] OrderCreateDTO orderCreateDTO)
             {
                 var location = GetControllerActionNames();
                 try
@@ -78,10 +80,10 @@ namespace ShopOnline.Controllers
                         return BadRequest(ModelState);
                     }
                     var order = _mapper.Map<Order>(orderCreateDTO);
-                    var isSuccess = await _businessLogic.Add(order);
-                    if (!isSuccess.IsSuccess)
+                    var result = await _businessLogic.Add(order);
+                    if (result.IsFailed)
                     {
-                        return InternalError($"{location}: Creation failed");
+                        return StatusCode(450, result.Errors[0].Message);
                     }
                     _logger.LogInfo($"{location}: Creation was successful");
                     return Created("Create", 1);
@@ -101,7 +103,7 @@ namespace ShopOnline.Controllers
             private ObjectResult InternalError(string message)
             {
                 _logger.LogError(message);
-                return StatusCode(500, "Something went wrong. Please contact the Administrator");
+                return StatusCode(500,  CustomErrors.InternalServerError);
             }
             
     }
