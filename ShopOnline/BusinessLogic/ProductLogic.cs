@@ -1,7 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using AutoMapper.Configuration.Annotations;
+using FluentResults;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore.Infrastructure;
 using ShopOnline.Contracts;
 using ShopOnline.Contracts.BusinessLogic;
 using ShopOnline.Contracts.Repository;
@@ -12,6 +15,7 @@ namespace ShopOnline.BusinessLogic
 {
     public class ProductLogic : IProductLogic
     {
+
         private readonly IProductRepository _productRepository;
 
         public ProductLogic(IProductRepository productRepository)

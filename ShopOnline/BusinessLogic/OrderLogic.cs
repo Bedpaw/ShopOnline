@@ -11,19 +11,22 @@ namespace ShopOnline.BusinessLogic
     {       
         private readonly IOrderRepository _orderRepository;
         private readonly IProductRepository _productRepository;
+        private readonly ICustomerRepository _customerRepository;
 
-        public OrderLogic(IOrderRepository orderRepository, IProductRepository productRepository)
+
+        public OrderLogic(IOrderRepository orderRepository, IProductRepository productRepository,
+            ICustomerRepository customerRepository)
         {
             _orderRepository = orderRepository;
             _productRepository = productRepository;
+            _customerRepository = customerRepository;
 
         }
         public async Task<bool> Add(Order order)
         {    
-            foreach (var orderItem in order.OrderItems)
-            {
-                orderItem.Product = await _productRepository.FindById(orderItem.ProductId);
-            }
+            
+            order.Customer = await _customerRepository.FindById(order.CustomerId);
+            
             var isSuccess = await _orderRepository.Create(order);
             return isSuccess;
         }
