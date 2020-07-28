@@ -6,8 +6,9 @@
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
-    <DocumentationFile>C:\Users\jablo\source\repos\ShopOnline\ShopOnline\ShopOnline.xml</DocumentationFile>
+    <DocumentationFile>C:\Users\badpa\source\repos\ShopOnline\ShopOnline\ShopOnline.xml</DocumentationFile>
     <NoWarn>1701;1702;1591</NoWarn>
+    <GenerateSerializationAssemblies>Off</GenerateSerializationAssemblies>
   </PropertyGroup>
 
   <ItemGroup>
