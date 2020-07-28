@@ -19,16 +19,27 @@ namespace ShopOnline.Services
             var isExists = await _db.Customers.AnyAsync(q => q.Id == id);
             return isExists;
         }
+        public async Task<bool> IsCustomerWithEqualName(string name)
+        {
+            var isExistName = await _db.Customers.AnyAsync(r => r.FirstName == name);
+            return isExistName;
+        }
 
+        public async Task<bool> IsCustomerWithEqualSurname(string surname)
+        {
+            var isExistSurname = await _db.Customers.AnyAsync(r => r.LastName == surname);
+            return isExistSurname;
+        }
+        
         public async Task<bool> Create(Customer customer)
         {
             await _db.Customers.AddAsync(customer);
             return await Save();
 
         }
-        public async Task<bool> Delete(Customer customer)
+        public async Task<bool> Delete(Customer entity)
         {
-            _db.Customers.Remove(customer);
+            _db.Customers.Remove(entity);
             return await Save();
         }
 
@@ -54,5 +65,7 @@ namespace ShopOnline.Services
             _db.Customers.Update(customer);
             return await Save();
         }
+
+       
     }
 }
