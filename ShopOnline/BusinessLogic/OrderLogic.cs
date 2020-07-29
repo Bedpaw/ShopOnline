@@ -15,15 +15,10 @@ namespace ShopOnline.BusinessLogic
         private readonly IProductRepository _productRepository;
         private readonly ICustomerRepository _customerRepository;
 
-<<<<<<< HEAD
 
-        public OrderLogic(IOrderRepository orderRepository, IProductRepository productRepository,
-            ICustomerRepository customerRepository)
-=======
         public OrderLogic(IOrderRepository orderRepository,
                           IProductRepository productRepository,
                           ICustomerRepository customerRepository)
->>>>>>> ba0344620061a788f175f2006728a6935dafc35d
         {
             _orderRepository = orderRepository;
             _productRepository = productRepository;
@@ -32,11 +27,9 @@ namespace ShopOnline.BusinessLogic
         }
         public async Task<Result> Add(Order order)
         {    
-<<<<<<< HEAD
-            
+          
             order.Customer = await _customerRepository.FindById(order.CustomerId);
-            
-=======
+
             if( ! await _customerRepository.IsExists(order.CustomerId) ) 
                 return Result.Fail(CustomErrors.CustomerByGivenIdNotExists);
 
@@ -48,6 +41,7 @@ namespace ShopOnline.BusinessLogic
 
                 if (orderItem.Quantity <= product.AvailableQuantity)
                 {
+                    return Result.Ok();
                     //product.
                 }
                 else
@@ -56,7 +50,6 @@ namespace ShopOnline.BusinessLogic
                 }
             }
 
->>>>>>> ba0344620061a788f175f2006728a6935dafc35d
             var isSuccess = await _orderRepository.Create(order);
 
             return isSuccess? Result.Ok() : Result.Fail(CustomErrors.AddOrderUnable);

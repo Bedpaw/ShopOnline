@@ -1,10 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-<<<<<<< HEAD
 using AutoMapper.Configuration.Annotations;
-=======
->>>>>>> ba0344620061a788f175f2006728a6935dafc35d
 using FluentResults;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore.Infrastructure;
