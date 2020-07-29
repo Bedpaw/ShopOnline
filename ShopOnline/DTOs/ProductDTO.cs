@@ -6,13 +6,10 @@ namespace ShopOnline.DTOs
 
     public class ProductDTO
     {
-        
         public int Id { get; set; }
         public string Name { get; set; }
         public float Price { get; set; }
-
         public decimal AvailableQuantity { get; set; }
-
         public string Image { get; set; }
   
     }

@@ -8,6 +8,7 @@ using ShopOnline.Contracts;
 using ShopOnline.Contracts.BusinessLogic;
 using ShopOnline.Data;
 using ShopOnline.DTOs;
+using ShopOnline.Utils;
 
 namespace ShopOnline.Controllers
 {
@@ -36,13 +37,13 @@ namespace ShopOnline.Controllers
         [ProducesResponseType(StatusCodes.Status201Created)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-        public async Task<IActionResult> Create([FromBody] CustomerCreateDTO customerDTO)
+        public async Task<IActionResult> Create([FromBody] CustomerCreateDTO CustomerDTO)
         {
             var location = GetControllerActionNames();
             try
             {
                 _logger.LogInfo($"{location}: Create Attempted");
-                if (customerDTO == null)
+                if (CustomerDTO == null)
                 {
                     _logger.LogWarn($"{location}: Empty Request was submitted");
                     return BadRequest(ModelState);
@@ -54,9 +55,9 @@ namespace ShopOnline.Controllers
                     return BadRequest(ModelState);
                 }
 
-                var customer = _mapper.Map<Customer>(customerDTO);
-                var isSuccess = await _businessLogic.Add(customer);
-                if (!isSuccess)
+                var customer = _mapper.Map<Customer>(CustomerDTO);
+                var result = await _businessLogic.Add(customer);
+                if (result.IsFailed)
                 {
                     return InternalError($"{location}: Creation failed");
                 }
@@ -117,8 +118,8 @@ namespace ShopOnline.Controllers
                     return BadRequest();
                 }
 
-                var isSuccess = await _businessLogic.Delete(id);
-                if (!isSuccess)
+                var result = await _businessLogic.Delete(id);
+                if (result.IsFailed)
                 {
                     return InternalError($"{location}: Delete failed for record with id: {id}");
                 }
@@ -143,7 +144,7 @@ namespace ShopOnline.Controllers
         private ObjectResult InternalError(string message)
         {
             _logger.LogError(message);
-            return StatusCode(500, "Something went wrong. Please contact the Administrator");
+            return StatusCode(500, CustomErrors.InternalServerError);
         }
     }
 }
