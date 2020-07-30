@@ -1,3 +1,6 @@
+using System;
+using System.IO;
+using System.Reflection;
 using AutoMapper;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -6,16 +9,14 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using ShopOnline.Contracts;
-using ShopOnline.Data;
-using ShopOnline.Services;
-using System;
-using System.IO;
-using System.Reflection;
+using Microsoft.OpenApi.Models;
 using ShopOnline.BusinessLogic;
+using ShopOnline.Contracts;
 using ShopOnline.Contracts.BusinessLogic;
 using ShopOnline.Contracts.Repository;
+using ShopOnline.Data;
 using ShopOnline.Mappings;
+using ShopOnline.Services;
 
 namespace ShopOnline
 {
@@ -48,7 +49,7 @@ namespace ShopOnline
 
             services.AddSwaggerGen(c =>
             {
-                c.SwaggerDoc("v1", new Microsoft.OpenApi.Models.OpenApiInfo
+                c.SwaggerDoc("v1", new OpenApiInfo
                 {
                     Title = "Grocery Store API",
                     Version = "v1",
@@ -61,16 +62,16 @@ namespace ShopOnline
             });
 
             services.AddSingleton<ILoggerService, LoggerService>();
-            
+
             services.AddScoped<IProductRepository, ProductRepository>();
             services.AddScoped<IProductLogic, ProductLogic>();
-            
+
             services.AddScoped<IOrderItemRepository, OrderItemRepository>();
             services.AddScoped<IOrderItemLogic, OrderItemLogic>();
-            
+
             services.AddScoped<IOrderRepository, OrderRepository>();
             services.AddScoped<IOrderLogic, OrderLogic>();
-            
+
             services.AddScoped<ICustomerRepository, CustomerRepository>();
             services.AddScoped<ICustomerLogic, CustomerLogic>();
 
@@ -107,10 +108,7 @@ namespace ShopOnline
             app.UseAuthentication();
             app.UseAuthorization();
 
-            app.UseEndpoints(endpoints =>
-            {
-                endpoints.MapControllers();
-            });
+            app.UseEndpoints(endpoints => { endpoints.MapControllers(); });
         }
     }
 }
