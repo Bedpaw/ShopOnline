@@ -1,6 +1,3 @@
-using System;
-using System.IO;
-using System.Reflection;
 using AutoMapper;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -17,6 +14,9 @@ using ShopOnline.Contracts.Repository;
 using ShopOnline.Data;
 using ShopOnline.Mappings;
 using ShopOnline.Services;
+using System;
+using System.IO;
+using System.Reflection;
 
 namespace ShopOnline
 {

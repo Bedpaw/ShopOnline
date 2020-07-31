@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Threading.Tasks;
-using AutoMapper;
+﻿using AutoMapper;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using ShopOnline.Contracts;
@@ -9,6 +6,9 @@ using ShopOnline.Contracts.BusinessLogic;
 using ShopOnline.Data;
 using ShopOnline.DTOs;
 using ShopOnline.Utils;
+using System;
+using System.Collections.Generic;
+using System.Threading.Tasks;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -86,7 +86,7 @@ namespace ShopOnline.Controllers
                 var isSuccess = await _businessLogic.Add(product);
                 if (!isSuccess.IsSuccess) return InternalError($"{location}: Creation failed");
                 _logger.LogInfo($"{location}: Creation was successful");
-                return Created("Create", new {product});
+                return Created("Create", new { product });
             }
             catch (Exception e)
             {

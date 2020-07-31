@@ -1,13 +1,11 @@
-﻿using System.Linq.Expressions;
-using System.Threading.Tasks;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+using System;
+using Xunit;
 
-namespace ShopOnlineTests
+namespace XShopOnlineTests
 {
-    [TestClass]
-    public class CustomerLogicTest
+    public class CustomerLogicTests
     {
-        [TestMethod]
+        [Fact]
         public async Task GetAllCustomers_ShouldReturnAllCustomers()
         {
             var customersTest = GetAllCustomers();
@@ -17,7 +15,5 @@ namespace ShopOnlineTests
             var result = controller.GetCustomers() as List<Customer>;
 
             Assert.AreEqual(customersTest.Count, result.Count);
-
         }
-    }
 }

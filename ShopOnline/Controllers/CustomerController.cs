@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Threading.Tasks;
-using AutoMapper;
+﻿using AutoMapper;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using ShopOnline.Contracts;
@@ -9,6 +6,9 @@ using ShopOnline.Contracts.BusinessLogic;
 using ShopOnline.Data;
 using ShopOnline.DTOs;
 using ShopOnline.Utils;
+using System;
+using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace ShopOnline.Controllers
 {
@@ -60,7 +60,7 @@ namespace ShopOnline.Controllers
                 if (result.IsFailed) return InternalError($"{location}: Creation failed");
 
                 _logger.LogInfo($"{location}: Creation was successful");
-                return Created("Create", new {customer});
+                return Created("Create", new { customer });
             }
             catch (Exception e)
             {

@@ -1,10 +1,10 @@
-﻿using System.Collections.Generic;
-using System.Threading.Tasks;
-using FluentResults;
+﻿using FluentResults;
 using ShopOnline.Contracts.BusinessLogic;
 using ShopOnline.Contracts.Repository;
 using ShopOnline.Data;
 using ShopOnline.Utils;
+using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace ShopOnline.BusinessLogic
 {

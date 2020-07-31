@@ -1,8 +1,8 @@
-﻿using System.Collections.Generic;
-using System.Threading.Tasks;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 using ShopOnline.Contracts.Repository;
 using ShopOnline.Data;
+using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace ShopOnline.Services
 {

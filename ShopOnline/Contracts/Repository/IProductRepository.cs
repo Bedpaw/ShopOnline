@@ -1,5 +1,5 @@
-﻿using System.Threading.Tasks;
-using ShopOnline.Data;
+﻿using ShopOnline.Data;
+using System.Threading.Tasks;
 
 namespace ShopOnline.Contracts.Repository
 {
