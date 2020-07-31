@@ -1,9 +1,11 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using FluentResults;
 using ShopOnline.Contracts.BusinessLogic;
 using ShopOnline.Contracts.Repository;
 using ShopOnline.Data;
+using ShopOnline.Utils;
 
 namespace ShopOnline.BusinessLogic
 {
@@ -11,21 +13,46 @@ namespace ShopOnline.BusinessLogic
     {       
         private readonly IOrderRepository _orderRepository;
         private readonly IProductRepository _productRepository;
+        private readonly ICustomerRepository _customerRepository;
 
-        public OrderLogic(IOrderRepository orderRepository, IProductRepository productRepository)
+
+        public OrderLogic(IOrderRepository orderRepository,
+                          IProductRepository productRepository,
+                          ICustomerRepository customerRepository)
         {
             _orderRepository = orderRepository;
             _productRepository = productRepository;
+            _customerRepository = customerRepository;
 
         }
-        public async Task<bool> Add(Order order)
+        public async Task<Result> Add(Order order)
         {    
+          
+            order.Customer = await _customerRepository.FindById(order.CustomerId);
+
+            if( ! await _customerRepository.IsExists(order.CustomerId) ) 
+                return Result.Fail(CustomErrors.CustomerByGivenIdNotExists);
+
             foreach (var orderItem in order.OrderItems)
             {
-                orderItem.Product = await _productRepository.FindById(orderItem.ProductId);
+                var product = await _productRepository.FindById(orderItem.ProductId);
+                
+                if (product == null) return Result.Fail(CustomErrors.NotExistByGivenId);
+
+                if (orderItem.Quantity <= product.AvailableQuantity)
+                {
+                    return Result.Ok();
+                    //product.
+                }
+                else
+                {
+                    return Result.Fail(new Error(CustomErrors.AddOrderUnable));
+                }
             }
+
             var isSuccess = await _orderRepository.Create(order);
-            return isSuccess;
+
+            return isSuccess? Result.Ok() : Result.Fail(CustomErrors.AddOrderUnable);
         }
         
 
@@ -35,12 +62,12 @@ namespace ShopOnline.BusinessLogic
             return orders;
         }
 
-        public Task<bool> Update(int id, Order entity)
+        public Task<Result> Update(int id, Order entity)
         {
             throw new System.NotImplementedException();
         }
 
-        public Task<bool> Delete(int id)
+        public Task<Result> Delete(int id)
         {
             throw new System.NotImplementedException();
         }
