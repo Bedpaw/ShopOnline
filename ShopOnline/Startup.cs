@@ -52,7 +52,7 @@ namespace ShopOnline
                 {
                     Title = "Grocery Store API",
                     Version = "v1",
-                    Description = "This is Codecool project"
+                    Description = "This is our Codecool project. It was made by Pawe³, Wojtek, Pati and Ola and we tried our best to present it on Saturday 1st of August as a complete project"
                 });
 
                 var xfile = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
