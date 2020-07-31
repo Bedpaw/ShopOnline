@@ -1,15 +1,14 @@
-﻿using System.Threading.Tasks;
+﻿using System;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace ShopOnlineTests
 {
     [TestClass]
-    public class CustomerLogicTest
+    public class UnitTest1
     {
         [TestMethod]
-        public async Task GetAllCustomers_ShouldReturnAllCustomers()
-        {   
-                    
+        public void TestMethod1()
+        {
         }
     }
 }

@@ -6,68 +6,68 @@
     <members>
         <member name="M:ShopOnline.BusinessLogic.ProductLogic.Add(ShopOnline.Data.Product)">
             <summary>
-            Add product to db if not duplicated
+                Add product to db if not duplicated
             </summary>
             <param name="product"></param>
             <returns></returns>
         </member>
         <member name="M:ShopOnline.Controllers.CustomerController.Create(ShopOnline.DTOs.CustomerCreateDTO)">
             <summary>
-            Create new Customer in db
+                Create new Customer in db
             </summary>
             <param name="CustomerDTO"></param>
             <returns></returns>
         </member>
         <member name="M:ShopOnline.Controllers.CustomerController.GetCustomers">
             <summary>
-            Gets all customers from db
+                Gets all customers from db
             </summary>
             <returns></returns>
         </member>
         <member name="M:ShopOnline.Controllers.CustomerController.Delete(System.Int32)">
             <summary>
-            Removes a customer by id
+                Removes a customer by id
             </summary>
             <param name="id"></param>
             <returns></returns>
         </member>
         <member name="M:ShopOnline.Controllers.OrderController.GetOrders">
             <summary>
-            Gets all orders from db
+                Gets all orders from db
             </summary>
             <returns></returns>
         </member>
         <member name="M:ShopOnline.Controllers.OrderController.Create(ShopOnline.DTOs.OrderCreateDTO)">
             <summary>
-            Create new order in db
+                Create new order in db
             </summary>
-            <param name="orderDTO"></param>
+            <param name="orderCreateDTO"></param>
             <returns></returns>
         </member>
         <member name="M:ShopOnline.Controllers.ProductController.GetProducts">
             <summary>
-            Gets all products from db
+                Gets all products from db
             </summary>
             <returns></returns>
         </member>
         <member name="M:ShopOnline.Controllers.ProductController.Create(ShopOnline.DTOs.ProductCreateDTO)">
             <summary>
-            Create new product type in db
+                Create new product type in db
             </summary>
             <param name="productDTO"></param>
             <returns></returns>
         </member>
         <member name="M:ShopOnline.Controllers.ProductController.Update(System.Int32,ShopOnline.DTOs.ProductUpdateDTO)">
             <summary>
-            Update a Product by Id
+                Update a Product by Id
             </summary>
             <param name="id"></param>
-            <param name="ProductDTO"></param>
+            <param name="ProductUpdateDTO"></param>
             <returns></returns>
         </member>
         <member name="M:ShopOnline.Controllers.ProductController.Delete(System.Int32)">
             <summary>
-            Removes an product by id
+                Removes an product by id
             </summary>
             <param name="id"></param>
             <returns></returns>
