@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-
-namespace ShopOnline.Utils
+﻿namespace ShopOnline.Utils
 {
     public static class CustomErrors
     {
@@ -15,10 +10,7 @@ namespace ShopOnline.Utils
         public const string AddCustomerError = "The customer with provided data could not have been added.";
         public const string InternalServerError = "Something went wrong. Please contact the Administrator.";
         public const string CustomerByGivenIdNotExists = "The customer with provided Id does not exists.";
-        
+
         public const int StatusCode450 = 450;
-
     }
-
-
 }
