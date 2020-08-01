@@ -26,35 +26,23 @@ namespace ShopOnline.BusinessLogic
 
         }
         public async Task<Result> Add(Order order)
-        {    
-          
-            order.Customer = await _customerRepository.FindById(order.CustomerId);
+        {
+            var result = true;
 
-            if( ! await _customerRepository.IsExists(order.CustomerId) ) 
-                return Result.Fail(CustomErrors.CustomerByGivenIdNotExists);
+            /*if (!await _customerRepository.IsExists(order.CustomerId))
+                return Result.Fail(new Error(CustomErrors.AddOrderUnable));*/
 
-            foreach (var orderItem in order.OrderItems)
+
+            // var orderCustomer = await _customerRepository.FindById(order.CustomerId);
+
+            if (result)
             {
-                var product = await _productRepository.FindById(orderItem.ProductId);
-                
-                if (product == null) return Result.Fail(CustomErrors.NotExistByGivenId);
-
-                if (orderItem.Quantity <= product.AvailableQuantity)
-                {
-                    return Result.Ok();
-                    //product.
-                }
-                else
-                {
-                    return Result.Fail(new Error(CustomErrors.AddOrderUnable));
-                }
+                await _orderRepository.Create(order);
+                return Result.Ok();
             }
-
-            var isSuccess = await _orderRepository.Create(order);
-
-            return isSuccess? Result.Ok() : Result.Fail(CustomErrors.AddOrderUnable);
+            return Result.Fail(new Error(CustomErrors.AddOrderUnable));
         }
-        
+
 
         public async Task<IList<Order>> GetAll()
         {
