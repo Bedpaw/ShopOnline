@@ -1,12 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Reflection.Metadata.Ecma335;
-using System.Threading.Tasks;
-using FluentResults;
+﻿using FluentResults;
 using ShopOnline.Contracts.BusinessLogic;
 using ShopOnline.Contracts.Repository;
 using ShopOnline.Data;
 using ShopOnline.Utils;
+using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace ShopOnline.BusinessLogic
 {
@@ -18,13 +16,14 @@ namespace ShopOnline.BusinessLogic
         {
             _customerRepository = customerRepository;
         }
+
         public async Task<Result> Add(Customer customer)
         {
-            var  isExistName = await _customerRepository.IsCustomerWithEqualName(customer.FirstName);
-            var  isExistSurname = await _customerRepository.IsCustomerWithEqualSurname(customer.LastName);
+            var isExistName = await _customerRepository.IsCustomerWithEqualName(customer.FirstName);
+            var isExistSurname = await _customerRepository.IsCustomerWithEqualSurname(customer.LastName);
 
             if (isExistName && isExistSurname) return Result.Fail(CustomErrors.BusinessLogicError);
-            
+
             var isSuccess = await _customerRepository.Create(customer);
             return isSuccess ? Result.Ok() : Result.Fail(CustomErrors.AddCustomerError);
         }
@@ -40,13 +39,11 @@ namespace ShopOnline.BusinessLogic
         {
             var isExist = await _customerRepository.IsExists(id);
             if (!isExist) return Result.Fail(CustomErrors.BusinessLogicError);
-            
+
             var isSuccess = await _customerRepository.Update(entity);
             return isSuccess ? Result.Ok() : Result.Fail(CustomErrors.BusinessLogicError);
-
-
         }
-       
+
 
         public async Task<Result> Delete(int id)
         {
@@ -56,7 +53,6 @@ namespace ShopOnline.BusinessLogic
             var customer = await _customerRepository.FindById(id);
             var isSuccess = await _customerRepository.Delete(customer);
             return isSuccess ? Result.Ok() : Result.Fail(CustomErrors.BusinessLogicError);
-
         }
     }
 }

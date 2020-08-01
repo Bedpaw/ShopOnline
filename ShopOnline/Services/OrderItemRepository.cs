@@ -1,19 +1,20 @@
-﻿using System.Collections.Generic;
-using System.Threading.Tasks;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 using ShopOnline.Contracts.Repository;
 using ShopOnline.Data;
+using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace ShopOnline.Services
 {
     public class OrderItemRepository : IOrderItemRepository
     {
         private readonly ApplicationDbContext _db;
+
         public OrderItemRepository(ApplicationDbContext db)
         {
             _db = db;
-            
         }
+
         public async Task<bool> IsExists(int id)
         {
             var isExists = await _db.OrderItems.AnyAsync(q => q.Id == id);
@@ -24,8 +25,8 @@ namespace ShopOnline.Services
         {
             await _db.OrderItems.AddAsync(entity);
             return await Save();
-
         }
+
         public async Task<bool> Delete(OrderItem entity)
         {
             _db.OrderItems.Remove(entity);
@@ -49,7 +50,7 @@ namespace ShopOnline.Services
             var changes = await _db.SaveChangesAsync();
             return changes > 0;
         }
-        
+
 
         public async Task<bool> Update(OrderItem entity)
         {

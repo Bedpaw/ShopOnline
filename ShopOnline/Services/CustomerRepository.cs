@@ -1,14 +1,15 @@
-﻿using System.Collections.Generic;
-using System.Threading.Tasks;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 using ShopOnline.Contracts.Repository;
 using ShopOnline.Data;
+using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace ShopOnline.Services
 {
     public class CustomerRepository : ICustomerRepository
     {
         private readonly ApplicationDbContext _db;
+
         public CustomerRepository(ApplicationDbContext db)
         {
             _db = db;
@@ -19,6 +20,7 @@ namespace ShopOnline.Services
             var isExists = await _db.Customers.AnyAsync(q => q.Id == id);
             return isExists;
         }
+
         public async Task<bool> IsCustomerWithEqualName(string name)
         {
             var isExistName = await _db.Customers.AnyAsync(r => r.FirstName == name);
@@ -30,13 +32,13 @@ namespace ShopOnline.Services
             var isExistSurname = await _db.Customers.AnyAsync(r => r.LastName == surname);
             return isExistSurname;
         }
-        
+
         public async Task<bool> Create(Customer customer)
         {
             await _db.Customers.AddAsync(customer);
             return await Save();
-
         }
+
         public async Task<bool> Delete(Customer entity)
         {
             _db.Customers.Remove(entity);
@@ -60,12 +62,11 @@ namespace ShopOnline.Services
             var changes = await _db.SaveChangesAsync();
             return changes > 0;
         }
+
         public async Task<bool> Update(Customer customer)
         {
             _db.Customers.Update(customer);
             return await Save();
         }
-
-       
     }
 }

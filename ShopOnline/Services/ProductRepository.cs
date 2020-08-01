@@ -1,15 +1,20 @@
+
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.ChangeTracking.Internal;
 using ShopOnline.Contracts;
+
 using ShopOnline.Contracts.Repository;
+using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace ShopOnline.Data
 {
     public class ProductRepository : IProductRepository
     {
         private readonly ApplicationDbContext _db;
+
         public ProductRepository(ApplicationDbContext db)
         {
             _db = db;
@@ -33,8 +38,8 @@ namespace ShopOnline.Data
         {
             await _db.Products.AddAsync(entity);
             return await Save();
-
         }
+
         public async Task<bool> Delete(Product entity)
         {
             _db.Products.Remove(entity);
@@ -71,5 +76,4 @@ namespace ShopOnline.Data
             return await Save();
         }
     }
-
 }

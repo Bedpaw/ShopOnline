@@ -1,5 +1,5 @@
-﻿using System.Threading.Tasks;
-using ShopOnline.Data;
+﻿using ShopOnline.Data;
+using System.Threading.Tasks;
 
 namespace ShopOnline.Contracts.Repository
 {
@@ -8,8 +8,5 @@ namespace ShopOnline.Contracts.Repository
         public Task<bool> IsProductWithEqualName(string name);
         public Task<bool> RemoveProductQuantityById(int id, int valueToReduce);
 
-
     }
 }
-
-

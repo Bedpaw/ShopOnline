@@ -1,6 +1,6 @@
-﻿using System.Collections.Generic;
+﻿using FluentResults;
+using System.Collections.Generic;
 using System.Threading.Tasks;
-using FluentResults;
 
 namespace ShopOnline.Contracts.BusinessLogic
 {
