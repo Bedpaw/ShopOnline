@@ -25,35 +25,60 @@ namespace ShopOnline.BusinessLogic
             _customerRepository = customerRepository;
 
         }
-        public async Task<Result> Add(Order order)
-        {    
-          
-            order.Customer = await _customerRepository.FindById(order.CustomerId);
-
-            if( ! await _customerRepository.IsExists(order.CustomerId) ) 
-                return Result.Fail(CustomErrors.CustomerByGivenIdNotExists);
-
+        private async Task<Result> IsOrderValid(Order order)
+        {
+          //  var isCustomerExist = await _customerRepository.IsExists(order.CustomerId);
+           // if (!isCustomerExist)
+          //  {
+           //     return Result.Fail(CustomErrors.CustomerByGivenIdNotExists);
+           // }
+            
             foreach (var orderItem in order.OrderItems)
             {
                 var product = await _productRepository.FindById(orderItem.ProductId);
-                
+
                 if (product == null) return Result.Fail(CustomErrors.NotExistByGivenId);
 
-                if (orderItem.Quantity <= product.AvailableQuantity)
+                if (orderItem.Quantity >= product.AvailableQuantity)
                 {
-                    return Result.Ok();
-                    //product.
-                }
-                else
-                {
-                    return Result.Fail(new Error(CustomErrors.AddOrderUnable));
+                    return Result.Fail(new Error(CustomErrors.NotEnoughProductsInStore(
+                                product.Name,
+                                orderItem.Quantity,
+                                product.AvailableQuantity)));
                 }
             }
-
-            var isSuccess = await _orderRepository.Create(order);
-
-            return isSuccess? Result.Ok() : Result.Fail(CustomErrors.AddOrderUnable);
+            return Result.Ok();
         }
+
+        private async Task<Result> RemoveProductsFromStore(Order order)
+        {
+            foreach (var orderItem in order.OrderItems)
+            {
+                await _productRepository.RemoveProductQuantityById(orderItem.ProductId, orderItem.Quantity);
+                
+            }
+
+            return Result.Ok();
+        }
+        public async Task<Result> Add(Order order)
+        {
+            var result =  await IsOrderValid(order);
+            
+            /*if (!await _customerRepository.IsExists(order.CustomerId))
+                return Result.Fail(new Error(CustomErrors.AddOrderUnable));*/
+
+
+            // var orderCustomer = await _customerRepository.FindById(order.CustomerId);
+
+            if (result.IsSuccess)
+            {
+                await RemoveProductsFromStore(order);
+                await _orderRepository.Create(order);
+                return Result.Ok();
+            }
+            return Result.Fail(new Error(CustomErrors.AddOrderUnable));
+        }
+
         
 
         public async Task<IList<Order>> GetAll()

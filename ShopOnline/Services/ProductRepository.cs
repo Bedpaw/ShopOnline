@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.ChangeTracking.Internal;
 using ShopOnline.Contracts;
 using ShopOnline.Contracts.Repository;
 
@@ -18,6 +19,14 @@ namespace ShopOnline.Data
         {
             var isExists = await _db.Products.AnyAsync(q => q.Id == id);
             return isExists;
+        }
+        public async Task<bool> RemoveProductQuantityById(int id, int valueToReduce)
+        {
+            var product = await FindById(id);
+
+            product.AvailableQuantity -= valueToReduce;
+            _db.Entry(product).Property("AvailableQuantity").IsModified = true;
+            return await Save();
         }
 
         public async Task<bool> Create(Product entity)

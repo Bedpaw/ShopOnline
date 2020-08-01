@@ -26,7 +26,7 @@ namespace ShopOnline.Data
         
         [Required]
         [Column(TypeName = "decimal(10,2)")]
-        public decimal? AvailableQuantity { get; set; }
+        public decimal AvailableQuantity { get; set; }
         
         [JsonIgnore]
         public virtual ICollection<OrderItem> OrderItems { get; set; }
