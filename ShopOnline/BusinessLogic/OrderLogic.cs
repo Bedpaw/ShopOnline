@@ -25,6 +25,7 @@ namespace ShopOnline.BusinessLogic
             _customerRepository = customerRepository;
 
         }
+
         private async Task<Result> IsOrderValid(Order order)
         {
           //  var isCustomerExist = await _customerRepository.IsExists(order.CustomerId);
@@ -78,8 +79,6 @@ namespace ShopOnline.BusinessLogic
             }
             return Result.Fail(new Error(CustomErrors.AddOrderUnable));
         }
-
-        
 
         public async Task<IList<Order>> GetAll()
         {
