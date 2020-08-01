@@ -1,6 +1,9 @@
+const urlVisual = "https://localhost:44335"
+const urlRider = "https://localhost:5001"
+
 window.load = function () {
     function takeData() {
-        fetch('https://localhost:44335/api/Product')
+        fetch(urlRider + '/api/Product')
             .then(response => response.json())
             .then((data) => showProducts(data));
 
@@ -115,7 +118,7 @@ window.load = function () {
             saveCart();
         }
 
-        // Count cart 
+        // Count cart
         obj.totalCount = function () {
             var totalCount = 0;
             for (var item in cart) {
@@ -204,7 +207,7 @@ window.load = function () {
     //send order
     $(".order").click(function () {
         const order = prepareOrder();
-        fetch("https://localhost:44335/api/Order", {
+        fetch(urlRider + "/api/Order", {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
