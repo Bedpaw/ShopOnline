@@ -13,12 +13,14 @@ namespace XShopOnlineTests
 {
     public class CustomerLogicTests
     {
-        private Mock<ICustomerRepository> customerRepositoryMock = new Mock<ICustomerRepository>()
+        private Mock<ICustomerRepository> customerRepositoryMock = new Mock<ICustomerRepository>();
 
         [Fact]
         public async Task GetAllCustomers_ShouldReturnAllCustomers()
         {
             var customersTest = GetAllTestCustomers();
+
+            customerRepositoryMock.Setup(x => x.FindAll());
 
             var controller = new CustomerLogic(customerRepositoryMock.Object);
 
@@ -38,7 +40,6 @@ namespace XShopOnlineTests
                 City = "Pcim Maly",
                 ZipCode = "77666"
             });
-            
             return customersTest;
         }
        
