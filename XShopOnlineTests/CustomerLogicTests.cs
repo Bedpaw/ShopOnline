@@ -6,20 +6,21 @@ using ShopOnline.Services;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using Moq;
 using Xunit;
 
 namespace XShopOnlineTests
 {
     public class CustomerLogicTests
     {
-        private ICustomerRepository customerRepository;
+        private Mock<ICustomerRepository> customerRepositoryMock = new Mock<ICustomerRepository>()
 
         [Fact]
-        public async Task GetAllCustomers_ShouldReturnAllCustomers() // nie dzia³a
+        public async Task GetAllCustomers_ShouldReturnAllCustomers()
         {
             var customersTest = GetAllTestCustomers();
 
-            var controller = new CustomerLogic(customerRepository);
+            var controller = new CustomerLogic(customerRepositoryMock.Object);
 
             var result = await controller.GetAll() as List<Customer>;
 
@@ -38,9 +39,9 @@ namespace XShopOnlineTests
                 ZipCode = "77666"
             });
             
-
             return customersTest;
         }
        
     }
+    
 }
