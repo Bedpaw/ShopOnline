@@ -12,12 +12,8 @@ class App extends React.Component {
       products: [],
       cartItems: [],
       sort: "",
+      order: { UserId: "", OrderItems: { productId: "", quantity: "" } },
     };
-
-
-  }
-  //PAWEL TU JEST GET I URL DO WSTAWIENIA
-  componentDidMount() {
     fetch('data/data.json')
       .then(response => response.json())
       .then(data => {
@@ -25,7 +21,8 @@ class App extends React.Component {
           products: data.products
         })
       })
-  };
+
+  }
 
   removeFromCart = (product) => {
     const cartItems = this.state.cartItems.slice();
@@ -72,8 +69,11 @@ class App extends React.Component {
         ),
     }));
   };
-  //PAWEL TU JEST DO WSTAWIENIA TEN URL POST PRODUCT
+
   postCart = (cartItems) => {
+    OrderItems = this.state.OrderItems;
+    cartItems.forEach(item =>
+      cartItems.)
     fetch("urldoPosta", {
       method: 'POST',
       headers: {
@@ -107,11 +107,11 @@ class App extends React.Component {
               <Products
                 products={this.state.products}
                 addToCart={this.addToCart}
-                postCart={this.postCart}
+
               ></Products>
             </div>
             <div className="sidebar">
-              <Cart cartItems={this.state.cartItems} removeFromCart={this.removeFromCart} />
+              <Cart cartItems={this.state.cartItems} removeFromCart={this.removeFromCart} postCart={this.postCart} />
             </div>
           </div>
         </main>

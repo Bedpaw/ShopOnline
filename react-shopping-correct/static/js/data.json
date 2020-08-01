@@ -1,0 +1,60 @@
+{
+    "products": [
+        {
+            "id": "1",
+            "name": "Banana",
+            "price": 0.5,
+            "availableQuantity": 50,
+            "image": "https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/b9c923fc-b1ea-4ea5-a7fe-8bf4a4d161fc/dbp6tcm-5eaa1d87-5b5d-4eb3-8274-abc0fce4766b.png/v1/fill/w_1024,h_1024,q_80,strp/angry_banana_by_ragenanners258_dbp6tcm-fullview.jpg?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOiIsImlzcyI6InVybjphcHA6Iiwib2JqIjpbW3siaGVpZ2h0IjoiPD0xMDI0IiwicGF0aCI6IlwvZlwvYjljOTIzZmMtYjFlYS00ZWE1LWE3ZmUtOGJmNGE0ZDE2MWZjXC9kYnA2dGNtLTVlYWExZDg3LTViNWQtNGViMy04Mjc0LWFiYzBmY2U0NzY2Yi5wbmciLCJ3aWR0aCI6Ijw9MTAyNCJ9XV0sImF1ZCI6WyJ1cm46c2VydmljZTppbWFnZS5vcGVyYXRpb25zIl19.ymP9H5-qT7QEIMXnK69ONyAqFbSzLcEdJbf9dMBefhc"
+        },
+        {
+            "id": "2",
+            "name": "Strawberry",
+            "price": 0.9,
+            "availableQuantity": 700,
+            "image": "https://cdn.pixabay.com/photo/2017/10/14/15/51/strawberry-2850845_960_720.png"
+        },
+        {
+            "id": "3",
+            "name": "Raspberry",
+            "price": 0.2,
+            "availableQuantity": 1000,
+            "image": "https://cdn.pixabay.com/photo/2017/10/14/15/51/raspberry-2850842_960_720.png"
+        },
+        {
+            "id": "4",
+            "name": "Kiwi",
+            "price": 1.5,
+            "availableQuantity": 150,
+            "image": "https://cdn.pixabay.com/photo/2013/07/12/19/34/kiwi-155022_960_720.png"
+        },
+        {
+            "id": "5",
+            "name": "Apple",
+            "price": 0.6,
+            "availableQuantity": 1550,
+            "image": "https://cdn.pixabay.com/photo/2016/06/23/18/55/apple-1475977_960_720.png"
+        },
+        {
+            "id": "6",
+            "name": "Apricot",
+            "price": 0.4,
+            "availableQuantity": 400,
+            "image": "https://cdn.pixabay.com/photo/2020/06/23/06/45/apricot-5331575_960_720.png"
+        },
+        {
+            "id": "7",
+            "name": "Orange",
+            "price": 1.5,
+            "availableQuantity": 500,
+            "image": "https://cdn.pixabay.com/photo/2018/02/24/10/03/orange-3177693_960_720.png"
+        },
+        {
+            "id": "8",
+            "name": "Avocado",
+            "price": 50,
+            "availableQuantity": 2,
+            "image": "https://scontent.fzgh1-1.fna.fbcdn.net/v/t1.0-9/59922551_304682407111959_1556794403484336128_n.jpg?_nc_cat=106&_nc_sid=09cbfe&_nc_ohc=wSdiX14mNWUAX8IAqOb&_nc_ht=scontent.fzgh1-1.fna&oh=fe1cc92b02e7102c00a71500eddbd36a&oe=5F369CE8"
+        }
+    ]
+}

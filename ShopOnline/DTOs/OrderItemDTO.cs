@@ -1,8 +1,4 @@
-﻿using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using ShopOnline.Data;
-
-namespace ShopOnline.DTOs
+﻿namespace ShopOnline.DTOs
 {
     public class OrderItemDTO
     {
@@ -11,9 +7,8 @@ namespace ShopOnline.DTOs
     }
 
     public class OrderItemCreateDTO
-    {   
+    {
         public int ProductId { get; set; }
         public int Quantity { get; set; }
     }
-    
 }

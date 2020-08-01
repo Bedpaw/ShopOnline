@@ -1,9 +1,10 @@
-﻿using System.Collections.Generic;
-using System.Threading.Tasks;
-using FluentResults;
+﻿using FluentResults;
 using ShopOnline.Contracts.BusinessLogic;
 using ShopOnline.Contracts.Repository;
 using ShopOnline.Data;
+using System;
+using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace ShopOnline.BusinessLogic
 {
@@ -15,26 +16,26 @@ namespace ShopOnline.BusinessLogic
         {
             _orderItemRepository = orderItemRepository;
         }
+
         public async Task<Result> Add(OrderItem orderItem)
         {
-            
             await _orderItemRepository.Create(orderItem);
             return Result.Ok();
         }
 
         public Task<IList<OrderItem>> GetAll()
         {
-            throw new System.NotImplementedException();
+            throw new NotImplementedException();
         }
 
         public Task<Result> Update(int id, OrderItem orderItem)
         {
-            throw new System.NotImplementedException();
+            throw new NotImplementedException();
         }
 
         public Task<Result> Delete(int id)
         {
-            throw new System.NotImplementedException();
+            throw new NotImplementedException();
         }
     }
 }

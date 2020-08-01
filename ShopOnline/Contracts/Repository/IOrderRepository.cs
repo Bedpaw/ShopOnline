@@ -2,8 +2,7 @@
 
 namespace ShopOnline.Contracts.Repository
 {
-    public interface IOrderRepository :IRepositoryBase<Order>
+    public interface IOrderRepository : IRepositoryBase<Order>
     {
-        
     }
 }

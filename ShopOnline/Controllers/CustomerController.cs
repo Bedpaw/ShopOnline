@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Threading.Tasks;
-using AutoMapper;
+﻿using AutoMapper;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using ShopOnline.Contracts;
@@ -9,6 +6,9 @@ using ShopOnline.Contracts.BusinessLogic;
 using ShopOnline.Data;
 using ShopOnline.DTOs;
 using ShopOnline.Utils;
+using System;
+using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace ShopOnline.Controllers
 {
@@ -29,7 +29,7 @@ namespace ShopOnline.Controllers
         }
 
         /// <summary>
-        /// Create new Customer in db
+        ///     Create new Customer in db
         /// </summary>
         /// <param name="CustomerDTO"></param>
         /// <returns></returns>
@@ -57,13 +57,10 @@ namespace ShopOnline.Controllers
 
                 var customer = _mapper.Map<Customer>(CustomerDTO);
                 var result = await _businessLogic.Add(customer);
-                if (result.IsFailed)
-                {
-                    return InternalError($"{location}: Creation failed");
-                }
+                if (result.IsFailed) return InternalError($"{location}: Creation failed");
 
                 _logger.LogInfo($"{location}: Creation was successful");
-                return Created("Create", new {customer});
+                return Created("Create", new { customer });
             }
             catch (Exception e)
             {
@@ -72,7 +69,7 @@ namespace ShopOnline.Controllers
         }
 
         /// <summary>
-        /// Gets all customers from db
+        ///     Gets all customers from db
         /// </summary>
         /// <returns></returns>
         [HttpGet]
@@ -97,7 +94,7 @@ namespace ShopOnline.Controllers
         }
 
         /// <summary>
-        /// Removes a customer by id
+        ///     Removes a customer by id
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
@@ -119,10 +116,7 @@ namespace ShopOnline.Controllers
                 }
 
                 var result = await _businessLogic.Delete(id);
-                if (result.IsFailed)
-                {
-                    return InternalError($"{location}: Delete failed for record with id: {id}");
-                }
+                if (result.IsFailed) return InternalError($"{location}: Delete failed for record with id: {id}");
 
                 _logger.LogInfo($"{location}: Record with id: {id} successfully deleted");
                 return NoContent();
