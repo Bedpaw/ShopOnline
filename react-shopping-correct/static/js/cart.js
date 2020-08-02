@@ -36,6 +36,9 @@ window.load = function () {
 
     takeData();
 
+
+
+
     var shoppingCart = (function () {
 
         cart = [];
@@ -155,7 +158,6 @@ window.load = function () {
         return obj;
     })();
 
-
     addItemToCart = function (event) {
         console.log('click');
         event.preventDefault();
@@ -166,7 +168,6 @@ window.load = function () {
         shoppingCart.addItemToCart(name, price, id, 1);
         displayCart();
     };
-
 
 
     // Clear items
@@ -276,6 +277,61 @@ window.load = function () {
     });
 
     displayCart();
+
+
+    addItemToCart = function (event) {
+        console.log('click');
+        event.preventDefault();
+        const button = event.target;
+        let name = button.dataset.name;
+        let price = Number(button.dataset.price);
+        let id = Number(button.dataset.id);
+        shoppingCart.addItemToCart(name, price, id, 1);
+        displayCart();
+    };
+
+
+    inputDataRegister = function (event) {
+        let userData = {};
+        let firstName = document.forms["registration"]["firstName"].value;
+        let lastName = document.forms["registration"]["lastName"].value;
+        let phone = document.forms["registration"]["phone"].value;
+        let email = document.forms["registration"]["email"].value;
+        let street = document.forms["registration"]["street"].value;
+        let city = document.forms["registration"]["city"].value;
+        let zipCode = document.forms["registration"]["zipCode"].value;
+        userData =
+        {
+            "firstName": firstName,
+            "lastName": lastName,
+            "phone": phone,
+            "email": email,
+            "street": street,
+            "city": city,
+            "zipCode": zipCode
+        }
+
+        fetch("https://localhost:44335/api/Customer", {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(userData),
+        })
+
+            .then(response => response.json())
+            .then(data => {
+                data ? console.log('Success') : console.log('Something went wrong');
+            })
+            .catch((error) => {
+                console.error('Error:', error);
+            })
+
+    }
+
+
+
+
 
 
 };
