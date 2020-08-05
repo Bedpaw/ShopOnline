@@ -1,21 +1,22 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+using AutoMapper;
 using Microsoft.AspNetCore.Builder;
-using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Identity.UI;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
-using ShopOnline.Data;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using System.Reflection;
-using System.IO;
+using Microsoft.OpenApi.Models;
+using ShopOnline.BusinessLogic;
 using ShopOnline.Contracts;
+using ShopOnline.Contracts.BusinessLogic;
+using ShopOnline.Contracts.Repository;
+using ShopOnline.Data;
+using ShopOnline.Mappings;
 using ShopOnline.Services;
+using System;
+using System.IO;
+using System.Reflection;
 
 namespace ShopOnline
 {
@@ -36,29 +37,44 @@ namespace ShopOnline
                     Configuration.GetConnectionString("DefaultConnection")));
             services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
                 .AddEntityFrameworkStores<ApplicationDbContext>();
-            
-            services.AddCors(o => {
+
+            services.AddCors(o =>
+            {
                 o.AddPolicy("CorsPolicy",
                     builder => builder.AllowAnyOrigin()
                         .AllowAnyMethod()
                         .AllowAnyHeader());
             });
-            
-            services.AddSwaggerGen(c => {
-                c.SwaggerDoc("v1", new Microsoft.OpenApi.Models.OpenApiInfo
+            services.AddAutoMapper(typeof(Maps));
+
+            services.AddSwaggerGen(c =>
+            {
+                c.SwaggerDoc("v1", new OpenApiInfo
                 {
                     Title = "Grocery Store API",
                     Version = "v1",
-                    Description = "This is Codecool project"
+                    Description = "This is our Codecool project. It was made by Pawe³, Wojtek, Pati and Ola and we tried our best to present it on Saturday 1st of August as a complete project"
                 });
 
                 var xfile = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
                 var xpath = Path.Combine(AppContext.BaseDirectory, xfile);
                 c.IncludeXmlComments(xpath);
             });
-         
+
             services.AddSingleton<ILoggerService, LoggerService>();
-            
+
+            services.AddScoped<IProductRepository, ProductRepository>();
+            services.AddScoped<IProductLogic, ProductLogic>();
+
+            services.AddScoped<IOrderItemRepository, OrderItemRepository>();
+            services.AddScoped<IOrderItemLogic, OrderItemLogic>();
+
+            services.AddScoped<IOrderRepository, OrderRepository>();
+            services.AddScoped<IOrderLogic, OrderLogic>();
+
+            services.AddScoped<ICustomerRepository, CustomerRepository>();
+            services.AddScoped<ICustomerLogic, CustomerLogic>();
+
             services.AddControllers();
         }
 
@@ -78,12 +94,13 @@ namespace ShopOnline
             }
 
             app.UseSwagger();
-            app.UseSwaggerUI(c => {
-                c.SwaggerEndpoint("/swagger/v1/swagger.json", "Grocery Store API" );
+            app.UseSwaggerUI(c =>
+            {
+                c.SwaggerEndpoint("/swagger/v1/swagger.json", "Grocery Store API");
                 c.RoutePrefix = "";
             });
             app.UseHttpsRedirection();
-            
+
             app.UseCors("CorsPolicy");
 
             app.UseRouting();
@@ -91,10 +108,7 @@ namespace ShopOnline
             app.UseAuthentication();
             app.UseAuthorization();
 
-            app.UseEndpoints(endpoints =>
-            {
-                endpoints.MapControllers();
-            });
+            app.UseEndpoints(endpoints => { endpoints.MapControllers(); });
         }
     }
 }
